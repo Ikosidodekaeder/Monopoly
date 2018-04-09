@@ -13,12 +13,10 @@ import de.ikosidodekaeder.monopoly.screens.ScreenGame;
 import de.ikosidodekaeder.monopoly.screens.ScreenMenu;
 
 public class Monopoly extends Game {
-	SpriteBatch batch;
-	Texture img;
 
 	ScreenGame screenGame;
     ScreenMenu screenMenu;
-	
+
 	@Override
 	public void create() {
 		//batch = new SpriteBatch();
@@ -34,6 +32,10 @@ public class Monopoly extends Game {
         screenGame.create();
 
         this.setScreen(screenMenu);
+
+		Board b = new Board("Map.txt");
+
+		System.out.println(b);
 	}
 
 	@Override
@@ -43,7 +45,6 @@ public class Monopoly extends Game {
 	
 	@Override
 	public void dispose () {
-		//batch.dispose();
-		//img.dispose();
+
 	}
 }
