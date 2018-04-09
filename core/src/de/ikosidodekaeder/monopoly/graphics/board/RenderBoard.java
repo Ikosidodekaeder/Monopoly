@@ -44,19 +44,19 @@ public class RenderBoard extends ElementContainer {
             return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/loos.png", Color.WHITE);
         }
         if (type == HORIZONTAL_LEFT) {
-            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_left.png", new Color(0.3f, 0.3f, (float) (Math.random()), 1));
+            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_left.png", new Color((float) (Math.random()), (float) (Math.random()), (float) (Math.random()), 1));
         }
         if (type == HORIZONTAL_RIGHT) {
-            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_right.png", new Color(0.3f, 0.3f, (float) (Math.random()), 1));
+            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_right.png", new Color((float) (Math.random()), (float) (Math.random()), (float) (Math.random()), 1));
         }
         if (type == VERTICAL_BOTTOM) {
-            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_bottom.png", new Color(0.3f, 0.3f, (float) (Math.random()), 1));
+            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_bottom.png", new Color((float) (Math.random()), (float) (Math.random()), (float) (Math.random()), 1));
         }
         if (type == VERTICAL_TOP) {
-            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_top.png", new Color(0.3f, 0.3f, (float) (Math.random()), 1));
+            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_top.png", new Color((float) (Math.random()), (float) (Math.random()), (float) (Math.random()), 1));
         }
 
-        return new RenderTile(x, y, 0, 0, "board/vertical_top.png", new Color(0.3f, 0.3f, (float) (Math.random()), 1));
+        return new RenderTile(x, y, 0, 0, "board/vertical_top.png", new Color((float) (Math.random()), (float) (Math.random()), (float) (Math.random()), 1));
     }
 
     private RenderTile createImageAt(int i) {
