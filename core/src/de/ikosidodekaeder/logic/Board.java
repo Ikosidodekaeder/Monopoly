@@ -111,7 +111,12 @@ public class Board {
     }
 
     boolean finishedTurnAllPlayer(){
-        return false ;//Players.stream().allMatch(p -> p.finishedTurn());
+        Iterator<Player> iter = Players.iterator();
+        if(iter.hasNext()){
+            if(iter.next().finishedTurn() == false)
+                return false;
+        }
+        return true ;
     }
 
 
