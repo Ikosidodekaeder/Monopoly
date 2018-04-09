@@ -24,7 +24,9 @@ android {
         targetSdkVersion 20
         versionCode 1
         versionName "1.0"
-
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {
@@ -36,7 +38,7 @@ android {
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 // called every time gradle gets executed, takes the native dependencies of
