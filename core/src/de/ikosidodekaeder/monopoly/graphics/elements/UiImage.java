@@ -14,18 +14,23 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class UiImage extends UiElement {
 
-    private Image image;
+    public Image image;
 
     public UiImage(float x, float y, float width, float height, String path) {
         super(x, y, width, height);
 
         image = new Image(new Texture(Gdx.files.internal(path)));
+
         super.width = image.getWidth();
         super.height = image.getHeight();
         Color color = image.getColor();
         color.set(color.r, color.g, color.b, 0.75f);
         setDisplayX(x);
         setDisplayY(y);
+    }
+
+    public UiImage(float x, float y, float width, float height) {
+        super(x, y, width, height);
     }
 
 
