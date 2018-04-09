@@ -35,7 +35,9 @@ Street;Hauptstraße;5400;9
 SpecialEvent;Gemeinschaftskarte;0;0
 Street;Bahnhofstraße;5600;9
 Station;Hauptbahnhof;2000;2
+SpecialEvent;EreignisKarte;0;0
 Street;Parkstraße;6500;10
+SpecialEvent;Zusatzsteuer;2000;10
 Street;Schloßallee;7000;10
 
 

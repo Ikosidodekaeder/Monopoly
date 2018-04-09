@@ -20,8 +20,8 @@ import java.util.List;
 
 public class Board {
 
-    List<Field>     actualBoard = new ArrayList<Field>();
-    List<Player>    Players = new ArrayList<Player>();
+    public List<Field>     actualBoard = new ArrayList<Field>();
+    public List<Player>    Players = new ArrayList<Player>();
 
 
 
@@ -36,7 +36,8 @@ public class Board {
                 //skip first line
                 reader.readLine();
                 while((currentline = reader.readLine()) != null){
-                    if(currentline.length() == 0)
+                    if(currentline.length() == 0
+                            || currentline.charAt(0) == '#')
                         continue;
 
                     String[] FieldData = currentline.split(";");
@@ -84,7 +85,6 @@ public class Board {
     }
 
     public Board(String Filename){
-        //TODO: URL must be relative, for debug purposes its absolute
         readMap(Filename);
 
 
@@ -104,7 +104,7 @@ public class Board {
         Players.add(player);
     }
 
-    void removePlayer(PlayerFigure figure){
+    void removePlayer(PlayerFigure figure) {
         Iterator<Player> iter = Players.iterator();
 
         while(iter.hasNext())
@@ -115,7 +115,7 @@ public class Board {
             }
     }
 
-    boolean finishedTurnAllPlayer(){
+    boolean finishedTurnAllPlayer() {
         Iterator<Player> iter = Players.iterator();
         if(iter.hasNext()){
             if(iter.next().finishedTurn() == false)
