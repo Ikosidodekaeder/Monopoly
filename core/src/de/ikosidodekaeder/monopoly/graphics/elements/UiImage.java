@@ -20,6 +20,8 @@ public class UiImage extends UiElement {
         super(x, y, width, height);
 
         image = new Image(new Texture(Gdx.files.internal(path)));
+        super.width = image.getWidth();
+        super.height = image.getHeight();
         Color color = image.getColor();
         color.set(color.r, color.g, color.b, 0.75f);
         setDisplayX(x);

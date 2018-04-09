@@ -11,14 +11,14 @@ public abstract class Field {
     protected String        Name     = "Nirvana";
     protected PlayerFigure  Owner    = null;
     protected long          Value    = -1;
-    protected int           ID       = -1;
+    protected int           Position = -1;
     protected int           group    = 0;
-    protected List<PlayerFigure>  PlayerOnStreet = new ArrayList<PlayerFigure>();
+    protected List<PlayerFigure>  PlayerOnStreet = new ArrayList<>();
 
-    protected Field(String name,int value,int group,int id_on_map){
+    protected Field(String name,int value,int group,int position){
         this.Name = name;
         this.Value = value;
-        this.ID = id_on_map;
+        this.Position = position;
         this.group = group;
     }
 
@@ -37,12 +37,11 @@ public abstract class Field {
         return null;
     }
 
+    public int boardID() { return Position;}
 
-    public int boardID() { return ID;}
     public int group() {
         return group;
     }
-
 
     public void changeOwner(Player newOwner) {
 

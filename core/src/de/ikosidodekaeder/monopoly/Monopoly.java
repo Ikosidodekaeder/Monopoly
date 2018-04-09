@@ -10,10 +10,16 @@ import de.ikosidodekaeder.monopoly.screens.ScreenMenu;
 
 public class Monopoly extends Game {
 
-	ScreenGame screenGame;
-    ScreenMenu screenMenu;
+    public static Monopoly instance;
 
-	@Override
+	public ScreenGame screenGame;
+    public ScreenMenu screenMenu;
+
+    public Monopoly() {
+        instance = this;
+    }
+
+    @Override
 	public void create() {
 
         FontManager.init();
@@ -25,11 +31,9 @@ public class Monopoly extends Game {
         screenMenu.create();
         screenGame.create();
 
-        this.setScreen(screenMenu);
+        this.setScreen(screenGame);
 
-		Board b = new Board("Map.txt");
 
-		System.out.println(b);
 	}
 
 	@Override
@@ -38,7 +42,7 @@ public class Monopoly extends Game {
 	}
 	
 	@Override
-	public void dispose () {
+	public void dispose() {
 
 	}
 }
