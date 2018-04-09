@@ -1,28 +1,20 @@
 package de.ikosidodekaeder.monopoly;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import de.ikosidodekaeder.logic.Board;
 import de.ikosidodekaeder.monopoly.graphics.util.FontManager;
 import de.ikosidodekaeder.monopoly.graphics.util.MenuUtil;
 import de.ikosidodekaeder.monopoly.screens.ScreenGame;
 import de.ikosidodekaeder.monopoly.screens.ScreenMenu;
 
 public class Monopoly extends Game {
-	SpriteBatch batch;
-	Texture img;
 
 	ScreenGame screenGame;
     ScreenMenu screenMenu;
-	
+
 	@Override
 	public void create() {
-		//batch = new SpriteBatch();
-		//img = new Texture("badlogic.jpg");
 
         FontManager.init();
         new MenuUtil();
@@ -34,6 +26,10 @@ public class Monopoly extends Game {
         screenGame.create();
 
         this.setScreen(screenMenu);
+
+		Board b = new Board("Map.txt");
+
+		System.out.println(b);
 	}
 
 	@Override
@@ -43,7 +39,6 @@ public class Monopoly extends Game {
 	
 	@Override
 	public void dispose () {
-		//batch.dispose();
-		//img.dispose();
+
 	}
 }
