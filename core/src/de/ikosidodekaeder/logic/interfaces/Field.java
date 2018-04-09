@@ -38,8 +38,9 @@ public abstract class Field {
     }
 
 
+    public int boardID() { return ID;}
     public int group() {
-        return 0;
+        return group;
     }
 
 

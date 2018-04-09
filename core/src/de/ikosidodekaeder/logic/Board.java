@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -32,6 +33,8 @@ public class Board {
                 //skip first line
                 reader.readLine();
                 while((currentline = reader.readLine()) != null){
+                    if(currentline.length() == 0)
+                        continue;
 
                     String[] FieldData = currentline.split(";");
 
@@ -54,6 +57,7 @@ public class Board {
                 }
             }catch(ArrayIndexOutOfBoundsException e){
                 e.printStackTrace();
+                System.err.println();
             }
             catch(IOException e)
             {
@@ -78,10 +82,33 @@ public class Board {
 
     public Board(String Filename){
         //TODO: URL must be relative, for debug purposes its absolute
-        readMap("C:\\Users\\z003PKSW\\Source\\Repos\\Monopoly\\android\\assets\\Map.txt");
+        readMap(Filename);
     }
 
+    @Override
+    public String toString(){
+       StringBuilder builder = new StringBuilder();
 
+       for(int i = 0; i < actualBoard.size(); i++){
+           builder.append(actualBoard.get(i)).append("\n");
+       }
+       return builder.toString();
+    }
+
+    void AddPlayer(Player player){
+        Players.add(player);
+    }
+
+    void removePlayer(PlayerFigure figure){
+        Iterator<Player> iter = Players.iterator();
+
+        while(iter.hasNext())
+            if(iter.next().PlayerID() == figure)
+            {
+                iter.remove();
+                break;
+            }
+    }
 
     boolean finishedTurnAllPlayer(){
         return false ;//Players.stream().allMatch(p -> p.finishedTurn());

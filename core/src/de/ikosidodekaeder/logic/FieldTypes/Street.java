@@ -20,6 +20,10 @@ public class Street extends Field {
         super(name,value,group,id_on_map);
     }
 
+    @Override
+    public String toString(){
+        return "Street: " + this.Name + " Worth: " + getValue();
+    }
 
     public int NumberOfHotels(){
         return Hotels;

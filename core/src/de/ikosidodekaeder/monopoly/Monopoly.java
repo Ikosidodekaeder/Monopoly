@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import de.ikosidodekaeder.logic.Board;
+
 public class Monopoly extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
@@ -14,6 +16,9 @@ public class Monopoly extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		//img = new Texture("badlogic.jpg");
+		Board b = new Board("Map.txt");
+
+		System.out.println(b);
 	}
 
 	@Override

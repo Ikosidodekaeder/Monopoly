@@ -13,10 +13,13 @@ import java.util.List;
 
 public class Plant extends Field {
 
-
     public Plant(String name,int value,int group,int id_on_map){
        super(name,value,group,id_on_map);
     }
 
+    @Override
+    public String toString(){
+        return "Plant: " + this.Name + " Worth: " + getValue();
+    }
 
 }

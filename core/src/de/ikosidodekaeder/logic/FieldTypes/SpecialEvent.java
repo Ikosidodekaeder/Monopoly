@@ -30,5 +30,10 @@ public class SpecialEvent extends Field {
         super(name,value,group,id_on_map);
     }
 
+    @Override
+    public String toString(){
+        return "SpecialEvent: " + this.Name ;
+    }
+
 
 }

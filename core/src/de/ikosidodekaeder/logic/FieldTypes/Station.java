@@ -20,5 +20,8 @@ public class Station extends Field {
         super(name,value,group,id_on_map);
     }
 
-
+    @Override
+    public String toString(){
+        return "Station: " + this.Name + " Worth: " + getValue();
+    }
 }

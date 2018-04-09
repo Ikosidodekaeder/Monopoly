@@ -5,6 +5,7 @@ import de.ikosidodekaeder.logic.interfaces.Field;
 import de.ikosidodekaeder.logic.interfaces.Player;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,6 +100,10 @@ public class HumanPlayer implements Player {
 
     @Override
     public long NettoValue() {
-        return 0;
+        int sum =0;
+        Iterator<Field> iter = propeties.iterator();
+        while(iter.hasNext())
+            sum += iter.next().getValue();
+        return sum + Balance();
     }
 }

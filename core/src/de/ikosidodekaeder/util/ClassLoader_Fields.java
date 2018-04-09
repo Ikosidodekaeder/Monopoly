@@ -41,7 +41,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class ClassLoader_Fields extends ClassLoader {
 
-    static final String Package = "com.ikosidodekaeder.logic.FieldTypes";
+    static final String Package = "de.ikosidodekaeder.logic.FieldTypes";
 
     public static Object InstanceFromMeta(String clazz, Class<?>[] ctorArgTypes, Object... args) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Class<?> FieldInstance = Class.forName(Package + "." + clazz);
