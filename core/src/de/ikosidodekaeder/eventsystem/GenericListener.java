@@ -4,6 +4,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import de.ikosidodekaeder.eventsystem.annotations.EventHandler;
+import de.ikosidodekaeder.logic.FieldTypes.Street;
+import de.ikosidodekaeder.logic.HumanPlayer;
+import de.ikosidodekaeder.logic.PlayerFigure;
 
 /**
  * Stores ONE EventHandler of an EventListener
@@ -37,7 +40,13 @@ public class GenericListener<E,L>  implements Comparable<GenericListener> {
 
     public void fire(E event){
         try {
-            invokable.invoke(listener, event);
+            invokable.setAccessible(true);
+            invokable.invoke(
+                    listener,
+                    event,
+                    new HumanPlayer(PlayerFigure.CAR,"Hannes"),
+                    new Street("test",2,2,2)
+            );
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

@@ -1,6 +1,7 @@
 package de.ikosidodekaeder.eventsystem;
 
 
+import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -13,34 +14,36 @@ public class ListenerProcessor<E,L> {
      */
     final Set<GenericListener<E,L>>     concreteHandler = Collections.synchronizedSet(new HashSet<GenericListener<E, L>>());
 
+    public ListenerProcessor(){
+
+    }
     public ListenerProcessor(E event,  L listener){
 
-        Arrays.stream(listener.getClass().getDeclaredMethods())
-                .filter(handler -> handler.isAnnotationPresent(EventHandler.class))
-                .forEach(
-                        handler -> {
-                            concreteHandler.add(new GenericListener<E,L>(
-                                    listener,
-                                    handler,
-                                    handler.getAnnotation(EventHandler.class)
-                            ));
-                        }
-                );
+        for (Method handler : listener.getClass().getDeclaredMethods()) {
+            if (handler.isAnnotationPresent(EventHandler.class)) {
+                concreteHandler.add(new GenericListener<>(
+                        listener,
+                        handler,
+                        handler.getAnnotation(EventHandler.class)
+                ));
+            }
+        }
     }
 
 
-    void remove(GenericListener<E,L> listener){
+    public void remove(GenericListener<E,L> listener){
         concreteHandler.remove(listener);
     }
 
-    void register(GenericListener<E,L> listener){
+    public void register(GenericListener<E,L> listener){
         concreteHandler.add(listener);
     }
 
     public void invoke(E event){
-        if(!concreteHandler.isEmpty())
-            concreteHandler.stream()
-                    //.filter(handler -> handler.getEventType() .equals (event))
-                    .forEach( handler -> handler.fire(event) );
+        if(!concreteHandler.isEmpty()) {//.filter(handler -> handler.getEventType() .equals (event))
+            for (GenericListener<E, L> handler : concreteHandler) {
+                handler.fire(event);
+            }
+        }
     }
 }

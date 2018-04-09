@@ -60,4 +60,7 @@ public abstract class Field {
         return Value;
     }
 
+
+    public abstract void onArrival(Player player) throws Exception;
+
 }

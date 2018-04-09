@@ -1,5 +1,6 @@
 package de.ikosidodekaeder.logic;
 
+
 import de.ikosidodekaeder.logic.interfaces.Field;
 import de.ikosidodekaeder.logic.interfaces.Player;
 import de.ikosidodekaeder.util.ClassLoader_Fields;
@@ -21,6 +22,8 @@ public class Board {
 
     List<Field>     actualBoard = new ArrayList<Field>();
     List<Player>    Players = new ArrayList<Player>();
+
+
 
     void readMap(String filename){
 
@@ -83,6 +86,8 @@ public class Board {
     public Board(String Filename){
         //TODO: URL must be relative, for debug purposes its absolute
         readMap(Filename);
+
+
     }
 
     @Override
