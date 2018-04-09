@@ -1,5 +1,7 @@
 package de.ikosidodekaeder.monopoly.graphics.board;
 
+import com.badlogic.gdx.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,22 +41,22 @@ public class RenderBoard extends ElementContainer {
 
     private RenderTile getImageForType(int type) {
         if (type == 0) {
-            return new RenderTile(x, y, 0, 0, "board/loos.png");
+            return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/loos.png", Color.WHITE);
         }
         if (type == HORIZONTAL_LEFT) {
-            return new RenderTile(x, y, 0, 0, "board/horizontal_left.png");
+            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_left.png", new Color((float) (Math.random()), (float) (Math.random()), (float) (Math.random()), 1));
         }
         if (type == HORIZONTAL_RIGHT) {
-            return new RenderTile(x, y, 0, 0, "board/horizontal_right.png");
+            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_right.png", new Color((float) (Math.random()), (float) (Math.random()), (float) (Math.random()), 1));
         }
         if (type == VERTICAL_BOTTOM) {
-            return new RenderTile(x, y, 0, 0, "board/vertical_bottom.png");
+            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_bottom.png", new Color((float) (Math.random()), (float) (Math.random()), (float) (Math.random()), 1));
         }
         if (type == VERTICAL_TOP) {
-            return new RenderTile(x, y, 0, 0, "board/vertical_top.png");
+            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_top.png", new Color((float) (Math.random()), (float) (Math.random()), (float) (Math.random()), 1));
         }
 
-        return new RenderTile(x, y, 0, 0, "board/vertical_top.png");
+        return new RenderTile(x, y, 0, 0, "board/vertical_top.png", new Color((float) (Math.random()), (float) (Math.random()), (float) (Math.random()), 1));
     }
 
     private RenderTile createImageAt(int i) {
@@ -120,7 +122,6 @@ public class RenderBoard extends ElementContainer {
             Field field = board.actualBoard.get(i);
 
             RenderTile tile = createImageAt(i);
-            System.out.println(i + " ---> " + tile.getX() + ", " + tile.getY());
             tile.field = field;
 
             this.children.add(tile);
