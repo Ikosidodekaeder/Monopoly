@@ -12,7 +12,14 @@ public interface Player{
 
     List<Field> OwnedProperties();
 
+    /**
+     *
+     */
     void startTurn();
+
+    /**
+     *
+     */
     void endTurn();
 
     /**

@@ -25,6 +25,7 @@ import java.util.List;
 
 public class SpecialEvent extends Field {
 
+    Runnable    Lambda = null;
 
     public SpecialEvent(String name,int value,int group,int id_on_map){
         super(name,value,group,id_on_map);
@@ -33,6 +34,15 @@ public class SpecialEvent extends Field {
     @Override
     public String toString(){
         return "SpecialEvent: " + this.Name ;
+    }
+
+    void setLambda(Runnable runnable){
+        Lambda = runnable;
+    }
+
+    void onArrival() {
+        if(Lambda != null)
+            Lambda.run();
     }
 
 

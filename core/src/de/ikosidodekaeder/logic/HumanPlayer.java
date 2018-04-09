@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class HumanPlayer implements Player {
 
-    List<Field>     propeties = new ArrayList<Field>();
+    List<Field>     propeties = new ArrayList<>();
     PlayerFigure    figure = null;
     String          name;
     int             Money;
