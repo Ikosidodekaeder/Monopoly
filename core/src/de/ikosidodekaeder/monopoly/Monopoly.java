@@ -1,12 +1,8 @@
 package de.ikosidodekaeder.monopoly;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import de.ikosidodekaeder.logic.Board;
 import de.ikosidodekaeder.monopoly.graphics.util.FontManager;
 import de.ikosidodekaeder.monopoly.graphics.util.MenuUtil;
 import de.ikosidodekaeder.monopoly.screens.ScreenGame;
@@ -19,8 +15,6 @@ public class Monopoly extends Game {
 
 	@Override
 	public void create() {
-		//batch = new SpriteBatch();
-		//img = new Texture("badlogic.jpg");
 
         FontManager.init();
         new MenuUtil();
