@@ -16,6 +16,13 @@ public class UiImage extends UiElement {
 
     public Image image;
 
+    public UiImage(float x, float y, Image image) {
+        super(x, y, image.getWidth(), image.getHeight());
+        this.image = image;
+        setDisplayX(x);
+        setDisplayY(y);
+    }
+
     public UiImage(float x, float y, float width, float height, String path) {
         super(x, y, width, height);
 

@@ -51,45 +51,48 @@ public class RenderBoard extends ElementContainer {
 
     private int x = 0, y = 0;
 
-    private int[] hSizes = new int[]{100, 70};
-    private int[] specialSizes = new int[]{100, 100};
-    private int[] vSizes = new int[]{70, 100};
+    private int[] hSizes = new int[]{200, 140};
+    private int[] specialSizes = new int[]{200, 200};
+    private int[] vSizes = new int[]{140, 200};
 
     public RenderBoard(float x, float y, float width, float height) {
         super(x, y, width, height);
     }
 
-    private RenderTile getImageForType(int type, int group) {
+    private RenderTile getImageForType(int type, int group, String name) {
         if (type == 0) {
-            return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/loos.png", Color.WHITE);
+            if (group == 0) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/loos.png", Color.WHITE, null);
+            if (group == 1) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/prison.png", Color.WHITE, null);
+            if (group == 2) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/parking.png", Color.WHITE, null);
+            if (group == 3) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/gotoprison.png", Color.WHITE, null);
         }
         if (type == HORIZONTAL_LEFT) {
-            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_left.png", colors[group]);
+            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_left.png", colors[group], name);
         }
         if (type == HORIZONTAL_RIGHT) {
-            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_right.png", colors[group]);
+            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_right.png", colors[group], name);
         }
         if (type == VERTICAL_BOTTOM) {
-            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_bottom.png", colors[group]);
+            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_bottom.png", colors[group], name);
         }
         if (type == VERTICAL_TOP) {
-            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_top.png", colors[group]);
+            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_top.png", colors[group], name);
         }
 
-        return new RenderTile(x, y, 0, 0, "board/vertical_top.png", colors[group]);
+        return new RenderTile(x, y, 0, 0, "board/vertical_top.png", colors[group], name);
     }
 
-    private RenderTile createImageAt(int i, int group) {
+    private RenderTile createImageAt(int i, int group, String name) {
         if (i == 0) {
             x = (specialSizes[0] * 2) + (vSizes[0] * (laneLength - 2));
             // start field
-            RenderTile image = getImageForType(0, 0);
+            RenderTile image = getImageForType(0, 0, name);
             x -= vSizes[0];
             return image;
         }
 
         if (i < firstLane) {
-            RenderTile image = getImageForType(VERTICAL_BOTTOM, group);
+            RenderTile image = getImageForType(VERTICAL_BOTTOM, group, name);
             if (i < firstLane-1) {
                 x -= vSizes[0];
             }
@@ -97,32 +100,32 @@ public class RenderBoard extends ElementContainer {
         }
         if (i == firstLane) {
             x -= specialSizes[0];
-            RenderTile image = getImageForType(0, 0);
+            RenderTile image = getImageForType(0, 1, name);
             y += specialSizes[1];
             return image;
         }
         if (i < secondLane) {
-            RenderTile image = getImageForType(HORIZONTAL_LEFT, group);
+            RenderTile image = getImageForType(HORIZONTAL_LEFT, group, name);
             y += hSizes[1];
             return image;
         }
         if (i == secondLane) {
-            RenderTile image = getImageForType(0, 0);
+            RenderTile image = getImageForType(0, 2, name);
             x += specialSizes[0];
             return image;
         }
         if (i < thirdLane) {
-            RenderTile image = getImageForType(VERTICAL_TOP, group);
+            RenderTile image = getImageForType(VERTICAL_TOP, group, name);
             x += vSizes[0];
             return image;
         }
         if (i == thirdLane) {
-            RenderTile image = getImageForType(0, 0);
+            RenderTile image = getImageForType(0, 3, name);
             y -= hSizes[1];
             return image;
         }
 
-        RenderTile image = getImageForType(HORIZONTAL_RIGHT, group);
+        RenderTile image = getImageForType(HORIZONTAL_RIGHT, group, name);
         y -= hSizes[1];
         return image;
 
@@ -141,8 +144,7 @@ public class RenderBoard extends ElementContainer {
         for (int i=0; i<size; i++) {
             Field field = board.actualBoard.get(i);
 
-            //final RenderTile tile = createImageAt(i);
-            final RenderTile tile = createImageAt(i, field.getGroup());
+            final RenderTile tile = createImageAt(i, field.getGroup(), field.getName());
             tile.field = field;
             tile.field.setArrivalCallback(new Delegate() {
                 @Override
