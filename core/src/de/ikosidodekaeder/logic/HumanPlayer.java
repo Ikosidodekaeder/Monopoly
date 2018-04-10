@@ -44,9 +44,14 @@ public class HumanPlayer implements Player {
     }
 
     @Override
-    public int move(int steps) {
+    public int setPosition(int position) {
         //TODO: This is not correct... but for the start it suffice
-        return (position+=steps);
+        return (this.position=position);
+    }
+    @Override
+    public int getPosition() {
+        //TODO: This is not correct... but for the start it suffice
+        return (this.position);
     }
 
     @Override

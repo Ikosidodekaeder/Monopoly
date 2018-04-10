@@ -3,7 +3,9 @@ package de.ikosidodekaeder.logic;
 
 import de.ikosidodekaeder.logic.interfaces.Field;
 import de.ikosidodekaeder.logic.interfaces.Player;
+import de.ikosidodekaeder.network.HexaServer;
 import de.ikosidodekaeder.util.ClassLoader_Fields;
+import de.ikosidodekaeder.util.Pair;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -22,6 +24,9 @@ public class Board {
 
     public List<Field>     actualBoard = new ArrayList<Field>();
     public List<Player>    Players = new ArrayList<Player>();
+
+    PlayerFigure           ClientFigure = null;
+
 
 
 
@@ -88,6 +93,14 @@ public class Board {
         readMap(Filename);
 
 
+
+    }
+
+    Pair<Integer,Integer> ThrowDices(){
+        return new Pair<>(
+                (((byte)(Math.random()*10))%6),
+                ((byte)(Math.random()*10))%6
+        );
     }
 
     @Override
@@ -98,6 +111,23 @@ public class Board {
            builder.append(actualBoard.get(i)).append("\n");
        }
        return builder.toString();
+    }
+
+    int wrapPos(int Pos){
+        if(Pos < actualBoard.size())
+            return Pos;
+        else {
+            Pos -= actualBoard.size();
+            return Pos;
+        }
+    }
+
+    void movePlayer(PlayerFigure figure, int steps){
+        for( Player p : Players){
+            if(p.PlayerID() == figure){
+                p.setPosition(wrapPos(steps));
+            }
+        }
     }
 
     void AddPlayer(Player player){
@@ -115,7 +145,7 @@ public class Board {
             }
     }
 
-    boolean finishedTurnAllPlayer() {
+    boolean haveFinishedTurnAllPlayer() {
         Iterator<Player> iter = Players.iterator();
         if(iter.hasNext()){
             if(iter.next().finishedTurn() == false)

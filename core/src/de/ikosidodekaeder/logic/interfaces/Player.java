@@ -25,10 +25,18 @@ public interface Player{
     /**
      * Moves The player around the board.
      * returns the position on the board after it has been moved
-     * @param steps
+     * @param pos
      * @return
      */
-    int move(int steps);
+    int setPosition(int pos);
+
+    /**
+     * Moves The player around the board.
+     * returns the position on the board after it has been moved
+     *
+     * @return
+     */
+    int getPosition();
 
     /**
      * Check if a Player can buy a Field.

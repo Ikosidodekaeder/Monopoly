@@ -22,11 +22,9 @@ public abstract class Field {
         this.group = group;
     }
 
-
     public List<PlayerFigure> currentlyVisitingPlayers() {
         return null;
     }
-
 
     public boolean hasOwner() {
         return false;
@@ -44,15 +42,15 @@ public abstract class Field {
     }
 
     public void changeOwner(Player newOwner) {
-
+        Owner = newOwner.PlayerID();
     }
 
     public void addPlayer(Player player) {
-
+        PlayerOnStreet.add(player.PlayerID());
     }
 
     public void removePlayer(Player player) {
-
+        PlayerOnStreet.remove(player.PlayerID());
     }
 
     public long getValue(){
