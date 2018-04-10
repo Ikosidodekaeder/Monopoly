@@ -3,7 +3,7 @@ SpecialEvent;Los;5000;0
 Street;Badstraße;600;1
 SpecialEvent;GemeinschaftsKarte;0;0
 Street;Turmstraße;800;1
-SpecialEvent;Steuern;500;0;0
+SpecialEvent;Steuern;500;0;11
 Station;Südbahnhof;2000;2
 Street;Chausseestraße;1500;3;
 SpecialEvent;EreignisKarte;0;0
@@ -37,7 +37,7 @@ Street;Bahnhofstraße;5600;9
 Station;Hauptbahnhof;2000;2
 SpecialEvent;EreignisKarte;0;0
 Street;Parkstraße;6500;10
-SpecialEvent;Zusatzsteuer;2000;10
+SpecialEvent;Zusatzsteuer;2000;11
 Street;Schloßallee;7000;10
 
 

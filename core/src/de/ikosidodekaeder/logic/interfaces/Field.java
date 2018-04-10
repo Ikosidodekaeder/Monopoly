@@ -39,7 +39,7 @@ public abstract class Field {
 
     public int boardID() { return Position;}
 
-    public int group() {
+    public int getGroup() {
         return group;
     }
 
