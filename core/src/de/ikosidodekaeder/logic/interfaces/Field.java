@@ -6,7 +6,7 @@ import de.ikosidodekaeder.logic.PlayerFigure;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Field {
+public abstract class Field implements OnArrival {
 
     protected String        Name     = "Nirvana";
     protected PlayerFigure  Owner    = null;
@@ -57,7 +57,14 @@ public abstract class Field {
         return Value;
     }
 
+    public long PropertyRent(){
+        return (long) (Value * 0.7);
+    }
 
-    public abstract void onArrival(Player player) throws Exception;
+    public PlayerFigure Owner(){
+        return Owner;
+    }
+
+    public abstract void onArrival(Player player);
 
 }

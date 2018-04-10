@@ -3,8 +3,12 @@ package de.ikosidodekaeder.monopoly.graphics.board;
 import com.badlogic.gdx.graphics.Color;
 
 import de.ikosidodekaeder.logic.Board;
+import de.ikosidodekaeder.logic.FieldTypes.Street;
 import de.ikosidodekaeder.logic.interfaces.Field;
+import de.ikosidodekaeder.logic.interfaces.Player;
 import de.ikosidodekaeder.monopoly.graphics.elements.ElementContainer;
+import de.ikosidodekaeder.monopoly.graphics.elements.UiImage;
+import de.ikosidodekaeder.util.Delegate;
 
 /**
  * Created by Sven on 09.04.2018.
@@ -132,8 +136,37 @@ public class RenderBoard extends ElementContainer {
         for (int i=0; i<size; i++) {
             Field field = board.actualBoard.get(i);
 
-            RenderTile tile = createImageAt(i, field.getGroup());
+            //final RenderTile tile = createImageAt(i);
+            final RenderTile tile = createImageAt(i, field.getGroup());
             tile.field = field;
+            tile.field.setArrivalCallback(new Delegate() {
+                @Override
+                public void invoke(Object... args) throws Exception {
+                    if(args.length == 0)
+                        throw new IllegalArgumentException("You must provide at least one Argument as parameter");
+                    if(!(args[0] instanceof Player))
+                        throw new IllegalArgumentException("First Parameter must be of type Player");
+
+                    Player p = (Player) args[0];
+
+                    if(tile.field.hasOwner()){
+                        for(Player player : board.Players)
+                        {
+                           if(tile.field instanceof Street){
+                               Street street = (Street)tile.field;
+                               player.ReceiveMoney(street.NumberOfHotels() * 300);
+                               p.PayMoney(street.NumberOfHotels() * 300);
+                               break;
+                           }
+                            if(player.PlayerID() == tile.field.Owner()){
+                                player.ReceiveMoney(tile.field.PropertyRent());
+                                p.PayMoney(tile.field.PropertyRent());
+                                break;
+                            }
+                        }
+                    }
+                }
+            });
 
             this.children.add(tile);
         }

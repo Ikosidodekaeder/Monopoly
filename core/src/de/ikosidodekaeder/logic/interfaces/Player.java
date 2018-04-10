@@ -76,6 +76,10 @@ public interface Player{
     void sellHouse(Field street);
 
 
+    void PayMoney(long amount);
+
+    void ReceiveMoney(long amount);
+
     /**
      * Returns the player's "liquid capital"
      * @return

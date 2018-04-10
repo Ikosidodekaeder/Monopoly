@@ -29,6 +29,11 @@ public class Street extends Field {
     }
 
     @Override
+    public void setArrivalCallback(Delegate runnable){
+        Lambda = runnable;
+    }
+
+    @Override
     public String toString(){
         return "Street: " + this.Name + " Worth: " + getValue();
     }

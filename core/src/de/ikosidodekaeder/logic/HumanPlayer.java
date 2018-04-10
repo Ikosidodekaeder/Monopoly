@@ -99,6 +99,16 @@ public class HumanPlayer implements Player {
     }
 
     @Override
+    public void PayMoney(long amount) {
+        Money += amount;
+    }
+
+    @Override
+    public void ReceiveMoney(long amount) {
+        Money -= amount;
+    }
+
+    @Override
     public long Balance() {
         return Money;
     }

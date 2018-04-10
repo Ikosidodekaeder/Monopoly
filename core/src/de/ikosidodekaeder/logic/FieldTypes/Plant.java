@@ -20,6 +20,11 @@ public class Plant extends Field {
     }
 
     @Override
+    public void setArrivalCallback(Delegate runnable){
+        Lambda = runnable;
+    }
+
+    @Override
     public void onArrival(Player player) throws Exception {
         if(Lambda != null)
             Lambda.invoke(player);

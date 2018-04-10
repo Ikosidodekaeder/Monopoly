@@ -37,7 +37,8 @@ public class SpecialEvent extends Field {
         return "SpecialEvent: " + this.Name ;
     }
 
-    void setLambda(Delegate runnable){
+    @Override
+    public void setArrivalCallback(Delegate runnable){
         Lambda = runnable;
     }
 
