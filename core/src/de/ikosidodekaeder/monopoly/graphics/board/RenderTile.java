@@ -8,26 +8,38 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import de.ikosidodekaeder.logic.interfaces.Field;
+import de.ikosidodekaeder.monopoly.graphics.elements.ElementContainer;
+import de.ikosidodekaeder.monopoly.graphics.elements.UILabel;
 import de.ikosidodekaeder.monopoly.graphics.elements.UiImage;
 
 /**
  * Created by Sven on 09.04.2018.
  */
 
-public class RenderTile extends UiImage {
+public class RenderTile extends ElementContainer {
 
     public Field field;
 
-    public RenderTile(float x, float y, float width, float height, String path, Color color) {
+    public RenderTile(float x, float y, float width, float height, String path, Color color, String name) {
         super(x, y, width, height);
 
-        image = new Image(setColor(path, color));
+        Image image = new Image(setColor(path, color));
 
         setWidth(image.getWidth());
         setHeight(image.getHeight());
 
-        setDisplayX(x);
-        setDisplayY(y);
+        UiImage uiImage = new UiImage(x, y, image);
+        children.add(uiImage);
+
+        if (name != null) {
+            if (name.contains("%N")) {
+                name = name.replace("%N", "\n");
+            }
+            UILabel label = new UILabel(x, y+image.getHeight(), 0, 0, 17, name, Color.DARK_GRAY, Color.GRAY);
+            label.setDisplayX(x + label.getWidth()/2);
+            label.setDisplayY(x + image.getHeight()/2 - label.getHeight()/2);
+            children.add(label);
+        }
     }
 
     public Texture setColor(String path, Color color) {

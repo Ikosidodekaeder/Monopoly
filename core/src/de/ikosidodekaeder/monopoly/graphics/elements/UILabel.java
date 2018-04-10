@@ -92,6 +92,7 @@ public class UILabel extends UiElement {
     @Override
     public void show(Stage stage) {
         this.Label.setVisible(true);
+        System.out.println("Showing label " + getLabel().getText());
     }
 
     @Override

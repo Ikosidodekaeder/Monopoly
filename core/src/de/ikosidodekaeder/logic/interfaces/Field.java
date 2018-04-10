@@ -33,8 +33,8 @@ public abstract class Field {
     }
 
 
-    public String Name() {
-        return null;
+    public String getName() {
+        return Name;
     }
 
     public int boardID() { return Position;}
