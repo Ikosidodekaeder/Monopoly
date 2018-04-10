@@ -160,6 +160,8 @@ public class RenderBoard extends ElementContainer {
 
                     Player p = (Player) args[0];
 
+
+
                     if(tile.field.hasOwner()){
                         for(Player player : board.Players)
                         {

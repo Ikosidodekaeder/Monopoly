@@ -123,10 +123,27 @@ public class Board {
         }
     }
 
+    /**
+     * Moves the player from one tile to another.
+     * Thereby removes and adds a player respectively
+     * from a tile to a tile.
+     *
+     * Triggers the onArrival Method
+     *
+     * @param figure
+     * @param steps
+     */
     public void movePlayer(PlayerFigure figure, int steps){
         for( Player p : Players){
             if(p.PlayerID() == figure){
-                p.setPosition(wrapPos(steps));
+
+                actualBoard.get(p.getPosition()).removePlayer(p);
+
+                int pos = wrapPos(steps);
+                p.setPosition(pos);
+
+                actualBoard.get(pos).addPlayer(p);
+                actualBoard.get(pos).onArrival(p);
             }
         }
     }

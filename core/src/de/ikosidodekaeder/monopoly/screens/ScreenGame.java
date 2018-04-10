@@ -54,6 +54,14 @@ public class ScreenGame extends MonopolyScreen {
                 50,
                 30);
 
+        final UiButton BeendeRunde = new UiButton(
+                "BeendeRunde",
+                Gdx.graphics.getWidth()-200,
+                Gdx.graphics.getHeight()-50,
+                200,
+                50,
+                30);
+
         Wuerfel.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -62,15 +70,14 @@ public class ScreenGame extends MonopolyScreen {
                 Pair<Integer,Integer> res = renderBoard.board.ThrowDices();
 
                 renderBoard.board.movePlayer(ClientPlayer,res.getFirst()+res.getSecond());
-
+                System.out.println("Würfel -> " + res.getFirst() + " " + res.getSecond());
                 Wuerfel.setText("Würfel -> " + res.getFirst() + " " + res.getSecond());
 
             }
         });
-        Wuerfel.addToStage(this.stage);
-        Wuerfel.show(this.stage);
 
-        addGuiElement(new UILabel(20, 20, 0, 0, 32, "Das ist ein Text"));
+
+        addGuiElement(Wuerfel);
     }
 
     @Override

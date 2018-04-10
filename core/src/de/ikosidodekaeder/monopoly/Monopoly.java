@@ -67,7 +67,7 @@ public class Monopoly extends Game {
         //Server.broadcastKeepAlive();
         sdfsdf++;
         if (sdfsdf >= 20) {
-            Server.send(new PacketServerList(HexaServer.senderId));
+            //Server.send(new PacketServerList(HexaServer.senderId));
             sdfsdf = 0;
         }
 		super.render();
