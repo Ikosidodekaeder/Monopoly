@@ -31,7 +31,7 @@ public class UiImage extends UiElement {
         super.width = image.getWidth();
         super.height = image.getHeight();
         Color color = image.getColor();
-        color.set(color.r, color.g, color.b, 0.75f);
+        color.set(color.r, color.g, color.b, 1f);
         setDisplayX(x);
         setDisplayY(y);
     }

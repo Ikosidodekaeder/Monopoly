@@ -61,25 +61,25 @@ public class RenderBoard extends ElementContainer {
 
     private RenderTile getImageForType(int type, int group, String name) {
         if (type == 0) {
-            if (group == 0) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/loos.png", Color.WHITE, null);
-            if (group == 1) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/prison.png", Color.WHITE, null);
-            if (group == 2) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/parking.png", Color.WHITE, null);
-            if (group == 3) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/gotoprison.png", Color.WHITE, null);
+            if (group == 0) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/loos.png", Color.WHITE, null, -1);
+            if (group == 1) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/prison.png", Color.WHITE, null, -1);
+            if (group == 2) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/parking.png", Color.WHITE, null, -1);
+            if (group == 3) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/gotoprison.png", Color.WHITE, null, -1);
         }
         if (type == HORIZONTAL_LEFT) {
-            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_left.png", colors[group], name);
+            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_left.png", colors[group], name, type);
         }
         if (type == HORIZONTAL_RIGHT) {
-            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_right.png", colors[group], name);
+            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_right.png", colors[group], name, type);
         }
         if (type == VERTICAL_BOTTOM) {
-            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_bottom.png", colors[group], name);
+            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_bottom.png", colors[group], name, type);
         }
         if (type == VERTICAL_TOP) {
-            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_top.png", colors[group], name);
+            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_top.png", colors[group], name, type);
         }
 
-        return new RenderTile(x, y, 0, 0, "board/vertical_top.png", colors[group], name);
+        return new RenderTile(x, y, 0, 0, "board/vertical_top.png", colors[group], name, type);
     }
 
     private RenderTile createImageAt(int i, int group, String name) {
@@ -146,6 +146,10 @@ public class RenderBoard extends ElementContainer {
 
             final RenderTile tile = createImageAt(i, field.getGroup(), field.getName());
             tile.field = field;
+            for (int j=0; j<(int) (Math.random()*6); j++) {
+                tile.addHouse();
+            }
+
             tile.field.setArrivalCallback(new Delegate() {
                 @Override
                 public void invoke(Object... args) throws Exception {
