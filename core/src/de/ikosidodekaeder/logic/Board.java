@@ -25,10 +25,11 @@ public class Board {
     public List<Field>     actualBoard = new ArrayList<Field>();
     public List<Player>    Players = new ArrayList<Player>();
 
-    PlayerFigure           ClientFigure = null;
+    PlayerFigure           ClientFigure = PlayerFigure.CAR;
 
-
-
+    public PlayerFigure getClientFigure(){
+        return ClientFigure;
+    }
 
     void readMap(String filename){
 
@@ -96,7 +97,7 @@ public class Board {
 
     }
 
-    Pair<Integer,Integer> ThrowDices(){
+    public Pair<Integer,Integer> ThrowDices(){
         return new Pair<>(
                 (((byte)(Math.random()*10))%6),
                 ((byte)(Math.random()*10))%6
@@ -113,7 +114,7 @@ public class Board {
        return builder.toString();
     }
 
-    int wrapPos(int Pos){
+    public int wrapPos(int Pos){
         if(Pos < actualBoard.size())
             return Pos;
         else {
@@ -122,7 +123,7 @@ public class Board {
         }
     }
 
-    void movePlayer(PlayerFigure figure, int steps){
+    public void movePlayer(PlayerFigure figure, int steps){
         for( Player p : Players){
             if(p.PlayerID() == figure){
                 p.setPosition(wrapPos(steps));
@@ -130,11 +131,11 @@ public class Board {
         }
     }
 
-    void AddPlayer(Player player){
+    public void AddPlayer(Player player){
         Players.add(player);
     }
 
-    void removePlayer(PlayerFigure figure) {
+    public  void removePlayer(PlayerFigure figure) {
         Iterator<Player> iter = Players.iterator();
 
         while(iter.hasNext())
@@ -145,7 +146,7 @@ public class Board {
             }
     }
 
-    boolean haveFinishedTurnAllPlayer() {
+    public boolean haveFinishedTurnAllPlayer() {
         Iterator<Player> iter = Players.iterator();
         if(iter.hasNext()){
             if(iter.next().finishedTurn() == false)

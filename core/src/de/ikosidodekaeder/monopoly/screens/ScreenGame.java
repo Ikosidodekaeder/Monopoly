@@ -5,12 +5,17 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import de.ikosidodekaeder.logic.PlayerFigure;
 import de.ikosidodekaeder.monopoly.graphics.board.RenderBoard;
+import de.ikosidodekaeder.monopoly.graphics.elements.UiButton;
 import de.ikosidodekaeder.monopoly.input.KeyListener;
 import de.ikosidodekaeder.monopoly.input.MonopolyCamera;
+import de.ikosidodekaeder.util.Pair;
 
 /**
  * Created by Sven on 09.04.2018.
@@ -40,7 +45,29 @@ public class ScreenGame extends MonopolyScreen {
         stage.setViewport(viewp);
         Gdx.input.setInputProcessor(keyListener);
 
+        final UiButton Wuerfel = new UiButton(
+                "Würfel",
+                Gdx.graphics.getWidth()-200,
+                Gdx.graphics.getHeight()-50,
+                200,
+                50,
+                30);
 
+        Wuerfel.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                PlayerFigure ClientPlayer = renderBoard.board.getClientFigure();
+
+                Pair<Integer,Integer> res = renderBoard.board.ThrowDices();
+
+                renderBoard.board.movePlayer(ClientPlayer,res.getFirst()+res.getSecond());
+
+                Wuerfel.setText("Würfel -> " + res.getFirst() + " " + res.getSecond());
+
+            }
+        });
+        Wuerfel.addToStage(this.stage);
+        Wuerfel.show(this.stage);
 
     }
 
