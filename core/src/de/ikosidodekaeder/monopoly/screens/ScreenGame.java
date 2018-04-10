@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.ikosidodekaeder.monopoly.graphics.board.RenderBoard;
+import de.ikosidodekaeder.monopoly.graphics.elements.UILabel;
 import de.ikosidodekaeder.monopoly.input.KeyListener;
 import de.ikosidodekaeder.monopoly.input.MonopolyCamera;
 
@@ -40,8 +41,7 @@ public class ScreenGame extends MonopolyScreen {
         stage.setViewport(viewp);
         Gdx.input.setInputProcessor(keyListener);
 
-
-
+        addGuiElement(new UILabel(20, 20, 0, 0, 32, "Das ist ein Text"));
     }
 
     @Override
@@ -57,6 +57,7 @@ public class ScreenGame extends MonopolyScreen {
         Gdx.gl.glClearColor(0.15f, 0.15f, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.stage.draw();
+        this.uiStage.draw();
     }
 
     @Override

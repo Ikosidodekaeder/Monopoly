@@ -15,7 +15,8 @@ import java.util.List;
  */
 public class Street extends Field {
 
-    int Hotels = 0;
+    public int Hotels = 0;
+    public int Houses = 0;
     Delegate Lambda = null;
 
     public Street(String name,int value,int group,int id_on_map){

@@ -158,7 +158,7 @@ public class HexaServer {
                     }
                     if (sendBuffer.isEmpty()) {
                         try {
-                            Thread.sleep(100);
+                            Thread.sleep(500);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -176,7 +176,8 @@ public class HexaServer {
                             out.println(packet.serialize());
                             out.flush();
                         }
-                    } catch (IOException e) {
+                        Thread.sleep(300);
+                    } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     } finally {
 
