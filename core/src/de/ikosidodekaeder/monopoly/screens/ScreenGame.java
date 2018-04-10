@@ -39,6 +39,9 @@ public class ScreenGame extends MonopolyScreen {
         FitViewport viewp = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), monopolyCamera.camera); // change this to your needed viewport
         stage.setViewport(viewp);
         Gdx.input.setInputProcessor(keyListener);
+
+
+
     }
 
     @Override
