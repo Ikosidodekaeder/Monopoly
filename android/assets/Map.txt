@@ -1,12 +1,12 @@
 Type;FieldName;Value;Group
-SpecialEvent;Los;5000;0
+StartEvent;Los;5000;0
 Street;Badstraße;600;1
-SpecialEvent;GemeinschaftsKarte;0;0
+CommunityEvent;GemeinschaftsKarte;0;0
 Street;Turmstraße;800;1
-SpecialEvent;Steuern;500;0;11
+TaxEvent;Steuern;500;0;11
 Station;Südbahnhof;2000;2
 Street;Chausseestraße;1500;3;
-SpecialEvent;EreignisKarte;0;0
+CommunityEvent;EreignisKarte;0;0
 Street;Elisenstraße;1600;3
 Street;Poststraße;1800;3
 SpecialEvent;Gefängnis;0;0
@@ -17,7 +17,7 @@ Street;Neue Straße;2300;4
 Station;Westbahnhof;2000;2
 Street;Münchner Straße;3000;6
 Street;Wiener Straße;3300;6
-SpecialEvent;Gemeinschaftskarte;0;0
+CommunityEvent;Gemeinschaftskarte;0;0
 Street;Berliner Straße;3500;6
 SpecialEvent;FreiParken;0;0
 Street;Theaterstraße;3800;7
@@ -29,15 +29,15 @@ Street;Lessingstraße;4600;8
 Street;Schillerstraße;4800;8
 Plant;Wasserwerk;2500;5
 Street;Goethestraße;5000;8
-SpecialEvent;Ab Ins Gefängnis;0;0
+PrisonEvent;Ab Ins Gefängnis;0;0
 Street;Rathausplatz;5200;9
 Street;Hauptstraße;5400;9
-SpecialEvent;Gemeinschaftskarte;0;0
+CommunityEvent;Gemeinschaftskarte;0;0
 Street;Bahnhofstraße;5600;9
 Station;Hauptbahnhof;2000;2
-SpecialEvent;EreignisKarte;0;0
+CommunityEvent;EreignisKarte;0;0
 Street;Parkstraße;6500;10
-SpecialEvent;Zusatzsteuer;2000;11
+TaxEvent;Zusatzsteuer;2000;11
 Street;Schloßallee;7000;10
 
 

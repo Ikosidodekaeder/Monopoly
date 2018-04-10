@@ -23,9 +23,13 @@ public class Street extends Field {
     }
 
     @Override
-    public void onArrival(Player player) throws Exception {
+    public void onArrival(Player player)  {
         if(Lambda != null)
-            Lambda.invoke(player);
+            try {
+                Lambda.invoke(player);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     @Override

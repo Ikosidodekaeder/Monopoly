@@ -3,7 +3,12 @@ package de.ikosidodekaeder.monopoly.graphics.board;
 import com.badlogic.gdx.graphics.Color;
 
 import de.ikosidodekaeder.logic.Board;
+import de.ikosidodekaeder.logic.FieldTypes.CommunityEvent;
+import de.ikosidodekaeder.logic.FieldTypes.PrisonEvent;
+import de.ikosidodekaeder.logic.FieldTypes.SpecialEvent;
+import de.ikosidodekaeder.logic.FieldTypes.StartEvent;
 import de.ikosidodekaeder.logic.FieldTypes.Street;
+import de.ikosidodekaeder.logic.FieldTypes.TaxEvent;
 import de.ikosidodekaeder.logic.interfaces.Field;
 import de.ikosidodekaeder.logic.interfaces.Player;
 import de.ikosidodekaeder.monopoly.graphics.elements.ElementContainer;
@@ -157,8 +162,21 @@ public class RenderBoard extends ElementContainer {
                                player.ReceiveMoney(street.NumberOfHotels() * 300);
                                p.PayMoney(street.NumberOfHotels() * 300);
                                break;
+                           }else if(tile.field instanceof SpecialEvent){
+                                if(tile.field instanceof StartEvent){
+                                    player.ReceiveMoney(tile.field.getValue());
+                                }
+                                if(tile.field instanceof TaxEvent){
+                                    player.PayMoney(tile.field.getValue());
+                                }
+                                if(tile.field instanceof CommunityEvent){
+                                    //SPECIAL
+                                }
+                                if(tile.field instanceof PrisonEvent){
+                                    player.setPosition(10);
+                                }
                            }
-                            if(player.PlayerID() == tile.field.Owner()){
+                            else if(player.PlayerID() == tile.field.Owner()){
                                 player.ReceiveMoney(tile.field.PropertyRent());
                                 p.PayMoney(tile.field.PropertyRent());
                                 break;
