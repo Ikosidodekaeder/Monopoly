@@ -3,7 +3,7 @@ StartEvent;Los;5000;0
 Street;Bad%Nstraße;600;1
 CommunityEvent;Gemeinschaftskarte;0;1
 Street;Turm%Nstraße;800;1
-TaxEvent;Steuern;500;0;11
+TaxEvent;Steuern;500;0;0
 Station;Südbahnhof;2000;2
 Street;Chaussee%Nstraße;1500;3;
 CommunityEvent;Ereigniskarte;0;1
@@ -37,7 +37,7 @@ Street;Bahnhof%Nstraße;5600;9
 Station;Hauptbahnhof;2000;2
 CommunityEvent;Ereigniskarte;0;1
 Street;Park%Nstraße;6500;10
-TaxEvent;Zusatzsteuer;2000;11
+TaxEvent;Zusatzsteuer;2000;0
 Street;Schloßallee;7000;10
 
 

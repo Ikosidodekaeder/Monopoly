@@ -34,7 +34,7 @@ public class RenderBoard extends ElementContainer {
             Color.SKY,      // 3
             Color.PINK,     // 4
             Color.WHITE,    // 5: Wasser/Elektrizitätswerk
-            Color.GOLD,     // 6
+            Color.ORANGE,   // 6
             Color.RED,      // 7
             Color.YELLOW,   // 8
             new Color(0x1C8C0CFF),    // 9
@@ -95,11 +95,12 @@ public class RenderBoard extends ElementContainer {
         }
         if (type == VERTICAL_BOTTOM) {
             direction = "bottom";
-            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/" + path + "_" + direction + ".png", color, name, type);
+            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/" + path + "_" + direction + ".png", color, name, type);
         }
         if (type == VERTICAL_TOP) {
             direction = "top";
-            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/" + path + "_" + direction + ".png", color, name, type);
+            System.out.println("#### TOP: " + path + ", " + direction + ", " + color.toString() + ", " + type + " -> " + name);
+            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/" + path + "_" + direction + ".png", color, name, type);
         }
 
         return new RenderTile(x, y, 0, 0, "board/street_top.png", colors[group], name, type);

@@ -1,6 +1,7 @@
 package de.ikosidodekaeder.monopoly.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -8,58 +9,51 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import de.ikosidodekaeder.monopoly.Monopoly;
 import de.ikosidodekaeder.monopoly.graphics.elements.UILabel;
 import de.ikosidodekaeder.monopoly.graphics.elements.UiButton;
-import de.ikosidodekaeder.monopoly.graphics.elements.UiImage;
 import de.ikosidodekaeder.monopoly.graphics.util.MenuUtil;
 
 /**
  * Created by Sven on 09.04.2018.
  */
 
-public class ScreenMenu extends MonopolyScreen {
+public class ScreenHost extends MonopolyScreen {
 
-    public UiImage background;
+    ScreenMenu screenMenu;
 
-    public ScreenMenu() {
-
+    public ScreenHost(ScreenMenu screenMenu) {
+        this.screenMenu = screenMenu;
     }
 
     @Override
     public void create() {
-        background = new UiImage(0, 0, 0, 0, "menu/city.png");
-        background.setDisplayX(Gdx.graphics.getWidth()/2 - background.getWidth()/2);
-        background.setDisplayY(Gdx.graphics.getHeight()/2 - background.getHeight()/2);
-
-        background.addToStage(stage);
-
-        UILabel title = new UILabel(MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY() + 600, 0, 0, 42, "Monopoly");
+        UILabel title = new UILabel(MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY() + 600, 0, 0, 42, "Monopoly - Host");
         addElement(title);
 
-        UiButton buttonHost = new UiButton("Host", MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY() + 400, 0, 0, 32);
-        UiButton buttonJoin = new UiButton("Join", MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY() + 200, 0, 0, 32);
-        addElement(buttonHost);
-        addElement(buttonJoin);
+        UiButton buttonStart = new UiButton("Start Game", MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY() + 400, 0, 0, 32);
+        UiButton buttonBack = new UiButton("Back", MenuUtil.getInstance().getX() - 100, MenuUtil.getInstance().getY() + 600, 0, 0, 32);
+        buttonBack.getTextButton().getStyle().fontColor = Color.RED;
+        addElement(buttonStart);
+        addElement(buttonBack);
 
 
-
-        buttonHost.addListener(new ChangeListener() {
+        buttonStart.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Monopoly.instance.setScreen(Monopoly.instance.screenHost);
+                Monopoly.instance.setScreen(Monopoly.instance.screenGame);
             }
         });
 
-        buttonJoin.addListener(new ChangeListener() {
+        buttonBack.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Monopoly.instance.setScreen(Monopoly.instance.screenJoin);
+                Monopoly.instance.setScreen(screenMenu);
             }
         });
     }
 
     @Override
     public void show() {
-        background.addToStage(stage);
-        background.getImage().setZIndex(0);
+        screenMenu.background.addToStage(stage);
+        screenMenu.background.getImage().setZIndex(0);
         super.show();
     }
 

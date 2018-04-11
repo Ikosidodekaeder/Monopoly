@@ -57,8 +57,7 @@ public class ScreenGame extends MonopolyScreen {
         FitViewport viewp = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), monopolyCamera.camera); // change this to your needed viewport
         stage.setViewport(viewp);
 
-        InputMultiplexer multiplexer = new InputMultiplexer(keyListener, stage, uiStage);
-        Gdx.input.setInputProcessor(multiplexer);
+        multiplexer.addProcessor(keyListener);
 
         final UiButton Wuerfel = new UiButton(
                 "Würfel",
