@@ -41,6 +41,8 @@ import de.ikosidodekaeder.util.Pair;
 
 public class ScreenGame extends MonopolyScreen {
 
+    private FitViewport viewport;
+
     public MonopolyCamera   monopolyCamera;
     public InputProcessor   keyListener;
 
@@ -70,8 +72,8 @@ public class ScreenGame extends MonopolyScreen {
         }
 
         monopolyCamera.camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        FitViewport viewp = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), monopolyCamera.camera); // change this to your needed viewport
-        stage.setViewport(viewp);
+        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), monopolyCamera.camera); // change this to your needed viewport
+        stage.setViewport(viewport);
 
         multiplexer.addProcessor(keyListener);
         multiplexer.addProcessor(stage);
@@ -123,6 +125,7 @@ public class ScreenGame extends MonopolyScreen {
 
         monopolyCamera.update();
         stage.act(Gdx.graphics.getDeltaTime());
+        viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         Gdx.gl.glClearColor(0.15f, 0.15f, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
