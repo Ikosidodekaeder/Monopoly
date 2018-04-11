@@ -1,6 +1,10 @@
 package de.ikosidodekaeder.logic;
 
 
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+
 import de.ikosidodekaeder.logic.interfaces.Field;
 import de.ikosidodekaeder.logic.interfaces.Player;
 import de.ikosidodekaeder.network.HexaServer;
@@ -8,14 +12,17 @@ import de.ikosidodekaeder.util.ClassLoader_Fields;
 import de.ikosidodekaeder.util.Pair;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.FileHandler;
 
 /**
  * Created by Johannes Lüke on 08.04.2018.
@@ -34,11 +41,14 @@ public class Board {
 
     void readMap(String filename){
 
-        String currentline = new String();
-        try{
-            BufferedReader reader = new BufferedReader(
-                    new FileReader(filename)
-            );
+        String currentline;
+        //try{
+            //File f = new File();
+            FileHandle handle = Gdx.files.getFileHandle(filename, Files.FileType.Internal);
+            /*BufferedReader reader = new BufferedReader(
+                    new FileReader(handle.file())
+            );*/
+            BufferedReader reader = new BufferedReader(handle.reader());
             try{
                 //skip first line
                 reader.readLine();
@@ -85,9 +95,9 @@ public class Board {
                 e.printStackTrace();
             }
 
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
+        //}catch (FileNotFoundException e){
+           /* e.printStackTrace();
+        }*/
 
     }
 

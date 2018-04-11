@@ -57,7 +57,7 @@ public class UiButton extends UiElement {
         textButton.setX(x);
         textButton.setY(y);
 
-        textButton.addListener(new InputListener() {
+        /*textButton.addListener(new InputListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 System.out.println("Enter Button");
@@ -83,7 +83,7 @@ public class UiButton extends UiElement {
                 }
                 return false;
             }
-        });
+        });*/
 
     }
 
