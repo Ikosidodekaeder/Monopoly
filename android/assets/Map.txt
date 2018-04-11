@@ -1,41 +1,41 @@
 Type;FieldName;Value;Group
 StartEvent;Los;5000;0
 Street;Bad%Nstraße;600;1
-CommunityEvent;GemeinschaftsKarte;0;0
+CommunityEvent;Gemeinschaftskarte;0;1
 Street;Turm%Nstraße;800;1
 TaxEvent;Steuern;500;0;11
 Station;Südbahnhof;2000;2
 Street;Chaussee%Nstraße;1500;3;
-CommunityEvent;EreignisKarte;0;0
+CommunityEvent;Ereigniskarte;0;1
 Street;Elisen%Nstraße;1600;3
 Street;Post%Nstraße;1800;3
 SpecialEvent;Gefängnis;0;0
 Street;See%Nstraße;2000;4
-Plant;Elektrizitätswerk;2500;5
+Plant;Elektrizitäts-%Nwerk;2500;5
 Street;Hafen%Nstraße;2200;4
 Street;Neue %Nstraße;2300;4
 Station;Westbahnhof;2000;2
 Street;Münchner %Nstraße;3000;6
 Street;Wiener %Nstraße;3300;6
-CommunityEvent;Gemeinschaftskarte;0;0
+CommunityEvent;Gemeinschaftskarte;0;1
 Street;Berliner %Nstraße;3500;6
 SpecialEvent;FreiParken;0;0
 Street;Theater%Nstraße;3800;7
 Street;Museums%Nstraße;4200;7
-SpecialEvent;EreignisKarte;0;0
+SpecialEvent;Ereigniskarte;0;1
 Street;Opernplatz;4500;7
 Station;Nordbahnhof;2000;2
 Street;Lessing%Nstraße;4600;8
 Street;Schiller%Nstraße;4800;8
-Plant;Wasserwerk;2500;5
+Plant;Wasser%nwerk;2500;5
 Street;Goethe%Nstraße;5000;8
 PrisonEvent;Ab Ins Gefängnis;0;0
 Street;Rathausplatz;5200;9
 Street;Haupt%Nstraße;5400;9
-CommunityEvent;Gemeinschaftskarte;0;0
+CommunityEvent;Gemeinschaftskarte;0;1
 Street;Bahnhof%Nstraße;5600;9
 Station;Hauptbahnhof;2000;2
-CommunityEvent;EreignisKarte;0;0
+CommunityEvent;Ereigniskarte;0;1
 Street;Park%Nstraße;6500;10
 TaxEvent;Zusatzsteuer;2000;11
 Street;Schloßallee;7000;10

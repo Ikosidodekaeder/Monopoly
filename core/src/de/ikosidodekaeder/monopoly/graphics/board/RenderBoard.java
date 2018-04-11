@@ -1,5 +1,6 @@
 package de.ikosidodekaeder.monopoly.graphics.board;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
 import de.ikosidodekaeder.logic.Board;
@@ -21,10 +22,10 @@ import de.ikosidodekaeder.util.Delegate;
 
 public class RenderBoard extends ElementContainer {
 
-    private static final int HORIZONTAL_LEFT    = 1;
-    private static final int HORIZONTAL_RIGHT   = 2;
-    private static final int VERTICAL_BOTTOM    = 3;
-    private static final int VERTICAL_TOP       = 4;
+    public static final int HORIZONTAL_LEFT    = 1;
+    public static final int HORIZONTAL_RIGHT   = 2;
+    public static final int VERTICAL_BOTTOM    = 3;
+    public static final int VERTICAL_TOP       = 4;
 
     private static final Color[] colors = new Color[]{
             Color.BLACK,    // 0: Special
@@ -66,20 +67,42 @@ public class RenderBoard extends ElementContainer {
             if (group == 2) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/parking.png", Color.WHITE, null, -1);
             if (group == 3) return new RenderTile(x, y, specialSizes[0], specialSizes[1], "board/gotoprison.png", Color.WHITE, null, -1);
         }
+
+        String path = "street";
+        String direction = "";
+        Color color = colors[group];
+
+        if (group == 1) {
+            // Ereignis oder Gemeinschaftskarte
+            if (name.equals("Ereigniskarte")) {
+                color = Color.RED;
+                path = "questionmark";
+            } else if (name.equals("Gemeinschaftskarte")) {
+                color = Color.BLUE;
+                path = "questionmark";
+            }
+            //return new RenderTile(x, y, hSizes[0], hSizes[1], "board/questionmark.png", color, name, type);
+        } else if (group == 2) {
+            path = "train";
+        }
         if (type == HORIZONTAL_LEFT) {
-            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_left.png", colors[group], name, type);
+            direction = "left";
+            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/" + path + "_" + direction + ".png", color, name, type);
         }
         if (type == HORIZONTAL_RIGHT) {
-            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/horizontal_right.png", colors[group], name, type);
+            direction = "right";
+            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/" + path + "_" + direction + ".png", color, name, type);
         }
         if (type == VERTICAL_BOTTOM) {
-            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_bottom.png", colors[group], name, type);
+            direction = "bottom";
+            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/" + path + "_" + direction + ".png", color, name, type);
         }
         if (type == VERTICAL_TOP) {
-            return new RenderTile(x, y, vSizes[0], vSizes[1], "board/vertical_top.png", colors[group], name, type);
+            direction = "top";
+            return new RenderTile(x, y, hSizes[0], hSizes[1], "board/" + path + "_" + direction + ".png", color, name, type);
         }
 
-        return new RenderTile(x, y, 0, 0, "board/vertical_top.png", colors[group], name, type);
+        return new RenderTile(x, y, 0, 0, "board/street_top.png", colors[group], name, type);
     }
 
     private RenderTile createImageAt(int i, int group, String name) {
@@ -146,7 +169,7 @@ public class RenderBoard extends ElementContainer {
 
             final RenderTile tile = createImageAt(i, field.getGroup(), field.getName());
             tile.field = field;
-            for (int j=0; j<(int) (Math.random()*6); j++) {
+            for (int j=0; j<(int) (Math.random()*8); j++) {
                 tile.addHouse();
             }
 

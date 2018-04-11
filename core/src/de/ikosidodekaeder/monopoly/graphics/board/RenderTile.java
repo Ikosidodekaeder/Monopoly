@@ -24,13 +24,19 @@ import de.ikosidodekaeder.monopoly.graphics.elements.UiImage;
 public class RenderTile extends ElementContainer {
 
     public Field field;
+    private int fieldType;
 
     private List<UiImage> buildings = new ArrayList<>();
 
-    public RenderTile(float x, float y, float width, float height, String path, Color color, String name, int lane) {
+    public RenderTile(float x, float y, float width, float height, String path, Color color, String name, int fieldType) {
         super(x, y, width, height);
 
-        Image image = new Image(setColor(path, color));
+        Image image;
+        if (name == null) {
+            image = new Image(new Texture(Gdx.files.internal(path)));
+        } else {
+            image = new Image(setColor(path, color));
+        }
 
         setWidth(image.getWidth());
         setHeight(image.getHeight());
@@ -47,6 +53,8 @@ public class RenderTile extends ElementContainer {
             label.setDisplayY(y + image.getHeight()/2 - label.getHeight()/2);
             children.add(label);
         }
+
+        this.fieldType = fieldType;
     }
 
     public Texture setColor(String path, Color color) {
@@ -90,7 +98,7 @@ public class RenderTile extends ElementContainer {
         }
 
         street.Houses++;
-        if (street.Houses >= 4) {
+        if (street.Houses > 4) {
             street.Houses = 0;
             street.Hotels = 1;
         }
@@ -99,14 +107,20 @@ public class RenderTile extends ElementContainer {
         buildings.clear();
 
         float x = getX();
+        if (fieldType == RenderBoard.HORIZONTAL_LEFT) {
+            x += getWidth() - 45;
+        }
         float y = getY();
+        if (fieldType == RenderBoard.VERTICAL_BOTTOM) {
+            y += getHeight() - 40;
+        }
         float addX = 0;
         float addY = 0;
         if (getWidth() > getHeight()) {
-            y += 5;
+            y += 8;
             addY = 30;
         } else {
-            x += 5;
+            x += 8;
             addX = 30;
         }
 

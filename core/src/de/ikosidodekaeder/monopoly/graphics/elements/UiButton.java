@@ -56,7 +56,7 @@ public class UiButton extends UiElement {
         textButton.setX(x);
         textButton.setY(y);
 
-        textButton.addListener(new InputListener() {
+        /*textButton.addListener(new InputListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 if (enterEvent != null) {
@@ -79,7 +79,7 @@ public class UiButton extends UiElement {
                 }
                 return false;
             }
-        });
+        });*/
 
     }
 
@@ -119,8 +119,8 @@ public class UiButton extends UiElement {
     }
 
     public void addListener(ChangeListener listener) {
-        //this.textButton.addListener(listener);
-        this.clickEvent = listener;
+        this.textButton.addListener(listener);
+        //this.clickEvent = listener;
     }
 
     public void setDisplayX(float x) {

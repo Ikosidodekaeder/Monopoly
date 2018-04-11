@@ -1,10 +1,13 @@
 package de.ikosidodekaeder.monopoly.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -16,6 +19,7 @@ import de.ikosidodekaeder.monopoly.graphics.elements.UiButton;
 import de.ikosidodekaeder.monopoly.graphics.elements.UILabel;
 import de.ikosidodekaeder.monopoly.input.KeyListener;
 import de.ikosidodekaeder.monopoly.input.MonopolyCamera;
+import de.ikosidodekaeder.monopoly.input.TouchListener;
 import de.ikosidodekaeder.util.Pair;
 
 /**
@@ -25,7 +29,7 @@ import de.ikosidodekaeder.util.Pair;
 public class ScreenGame extends MonopolyScreen {
 
     public MonopolyCamera   monopolyCamera;
-    public KeyListener      keyListener;
+    public InputProcessor   keyListener;
 
     RenderBoard renderBoard;
 
@@ -39,12 +43,21 @@ public class ScreenGame extends MonopolyScreen {
         renderBoard.addToStage(this.stage);
         renderBoard.show(this.stage);
 
-        keyListener = new KeyListener();
+        switch (Gdx.app.getType()) {
+            case Android:
+                keyListener = new GestureDetector(new TouchListener());
+                break;
+            default:
+                keyListener = new KeyListener();
+                break;
+        }
 
         monopolyCamera.camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         FitViewport viewp = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), monopolyCamera.camera); // change this to your needed viewport
         stage.setViewport(viewp);
-        Gdx.input.setInputProcessor(keyListener);
+
+        InputMultiplexer multiplexer = new InputMultiplexer(keyListener, stage, uiStage);
+        Gdx.input.setInputProcessor(multiplexer);
 
         final UiButton Wuerfel = new UiButton(
                 "Würfel",
@@ -89,6 +102,7 @@ public class ScreenGame extends MonopolyScreen {
     public void render(float delta) {
 
         monopolyCamera.update();
+        stage.act(Gdx.graphics.getDeltaTime());
 
         Gdx.gl.glClearColor(0.15f, 0.15f, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

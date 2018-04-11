@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
 import de.ikosidodekaeder.monopoly.graphics.elements.UILabel;
+import de.ikosidodekaeder.monopoly.graphics.elements.UiButton;
 import de.ikosidodekaeder.monopoly.graphics.util.MenuUtil;
 
 /**
@@ -18,8 +19,13 @@ public class ScreenMenu extends MonopolyScreen {
 
     @Override
     public void create() {
-        UILabel title = new UILabel(MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY(), 0, 0, 32, "Monopoly");
+        UILabel title = new UILabel(MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY() + 600, 0, 0, 42, "Monopoly");
         addElement(title);
+
+        UiButton buttonHost = new UiButton("Host", MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY() + 400, 0, 0, 32);
+        UiButton buttonJoin = new UiButton("Join", MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY() + 200, 0, 0, 32);
+        addElement(buttonHost);
+        addElement(buttonJoin);
     }
 
     @Override
