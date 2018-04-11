@@ -236,13 +236,13 @@ public class HexaServer {
 
                         if (readAmount == 0) {
                             running = false;
-                            //System.out.println("Connection lost: Server closed connection");
-                            disconnectReason = "Disconnected: Server closed connection";
+                            //System.out.println("Connection lost: server closed connection");
+                            disconnectReason = "Disconnected: server closed connection";
                         }
 
                     } catch (SocketTimeoutException e) {
                         running = false;
-                        //System.out.println("Connection to the Server lost: Timeout (" + TIMEOUT + ")");
+                        //System.out.println("Connection to the server lost: Timeout (" + TIMEOUT + ")");
                         disconnectReason = "Disconnected: Timeout (" + TIMEOUT + ")";
                     } catch (IOException e) {
                         e.printStackTrace();

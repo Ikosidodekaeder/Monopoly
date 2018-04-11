@@ -38,12 +38,21 @@ public abstract class MonopolyScreen implements Screen {
     public void show() {
         elements.show(stage);
         uiElements.show(uiStage);
-        Gdx.input.setInputProcessor(multiplexer);
+        //Gdx.input.setInputProcessor(multiplexer);
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
         uiStage.getViewport().update(width, height, true);
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public Stage getUiStage() {
+        return uiStage;
     }
 }

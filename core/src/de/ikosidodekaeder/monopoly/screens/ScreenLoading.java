@@ -1,6 +1,7 @@
 package de.ikosidodekaeder.monopoly.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -17,11 +18,25 @@ import de.ikosidodekaeder.network.Packets.PacketRegister;
  * Created by Sven on 09.04.2018.
  */
 
-public class ScreenMenu extends MonopolyScreen {
+public class ScreenLoading extends MonopolyScreen {
+
+    private String[] loadingStrings = {
+            "Loading.",
+            "Loading..",
+            "Loading...",
+            "Loading....",
+            "Loading.....",
+            "Loading......",
+    };
+    private float loadingCounter = 0;
+
+    UILabel waitingLabel;
 
     public UiImage background;
 
-    public ScreenMenu() {
+    public Callback updateCallback;
+
+    public ScreenLoading() {
 
     }
 
@@ -36,32 +51,9 @@ public class ScreenMenu extends MonopolyScreen {
         UILabel title = new UILabel(MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY() + 600, 0, 0, 42, "Monopoly");
         addElement(title);
 
-        UiButton buttonHost = new UiButton("Host", MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY() + 400, 0, 0, 32);
-        UiButton buttonJoin = new UiButton("Join", MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY() + 200, 0, 0, 32);
-        addElement(buttonHost);
-        addElement(buttonJoin);
-
-
-
-        buttonHost.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Monopoly.instance.connect(true);
-                Monopoly.instance.server.send(new PacketRegister(
-                        HexaServer.senderId, // This is the host id
-                        "Raum " + ((int) (Math.random()*100)+1),
-                        false
-                ));
-                Monopoly.instance.setScreen(Monopoly.instance.screenHost);
-            }
-        });
-
-        buttonJoin.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Monopoly.instance.setScreen(Monopoly.instance.screenJoin);
-            }
-        });
+        waitingLabel = new UILabel(MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY(), 0, 0, 62, loadingStrings[0]);
+        waitingLabel.getLabel().getStyle().fontColor = Color.SKY;
+        addElement(waitingLabel);
     }
 
     @Override
@@ -73,9 +65,18 @@ public class ScreenMenu extends MonopolyScreen {
 
     @Override
     public void render(float delta) {
+        waitingLabel.getLabel().setText(loadingStrings[(int) loadingCounter]);
+        loadingCounter += 1;
+        if (loadingCounter >= loadingStrings.length) {
+            loadingCounter = 0;
+        }
+
         Gdx.gl.glClearColor(0.15f, 0.15f, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
+
+        if (updateCallback != null)
+            updateCallback.update();
     }
 
     @Override
@@ -95,11 +96,17 @@ public class ScreenMenu extends MonopolyScreen {
 
     @Override
     public void hide() {
-
+        updateCallback = null;
     }
 
     @Override
     public void dispose() {
+
+    }
+
+    public abstract static class Callback {
+
+        public abstract void update();
 
     }
 }

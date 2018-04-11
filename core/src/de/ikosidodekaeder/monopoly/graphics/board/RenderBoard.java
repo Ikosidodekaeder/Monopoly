@@ -2,6 +2,13 @@ package de.ikosidodekaeder.monopoly.graphics.board;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.bind.Element;
 
 import de.ikosidodekaeder.logic.Board;
 import de.ikosidodekaeder.logic.FieldTypes.CommunityEvent;
@@ -12,8 +19,10 @@ import de.ikosidodekaeder.logic.FieldTypes.Street;
 import de.ikosidodekaeder.logic.FieldTypes.TaxEvent;
 import de.ikosidodekaeder.logic.interfaces.Field;
 import de.ikosidodekaeder.logic.interfaces.Player;
+import de.ikosidodekaeder.monopoly.graphics.ClickEvent;
 import de.ikosidodekaeder.monopoly.graphics.elements.ElementContainer;
 import de.ikosidodekaeder.monopoly.graphics.elements.UiImage;
+import de.ikosidodekaeder.monopoly.screens.ScreenGame;
 import de.ikosidodekaeder.util.Delegate;
 
 /**
@@ -58,6 +67,7 @@ public class RenderBoard extends ElementContainer {
 
     public RenderBoard(float x, float y, float width, float height) {
         super(x, y, width, height);
+
     }
 
     private RenderTile getImageForType(int type, int group, String name) {
@@ -99,7 +109,6 @@ public class RenderBoard extends ElementContainer {
         }
         if (type == VERTICAL_TOP) {
             direction = "top";
-            System.out.println("#### TOP: " + path + ", " + direction + ", " + color.toString() + ", " + type + " -> " + name);
             return new RenderTile(x, y, vSizes[0], vSizes[1], "board/" + path + "_" + direction + ".png", color, name, type);
         }
 
@@ -155,7 +164,7 @@ public class RenderBoard extends ElementContainer {
 
     }
 
-    public void createBoard() {
+    public void createBoard(final ScreenGame screenGame) {
         board = new Board("Map.txt");
         size        = board.actualBoard.size();
         laneLength  = size/4;
@@ -170,9 +179,24 @@ public class RenderBoard extends ElementContainer {
 
             final RenderTile tile = createImageAt(i, field.getGroup(), field.getName());
             tile.field = field;
-            for (int j=0; j<(int) (Math.random()*8); j++) {
-                tile.addHouse();
-            }
+            tile.uiImage.getImage().addListener(new ClickListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    System.out.println("cliicicickcickickc");
+                    return true;
+                }
+            });
+            /*
+            .addClickEvent(new ClickEvent() {
+                @Override
+                public void click() {
+                    System.out.println("cliicicickcickickc");
+                    screenGame.selectedTile = tile;
+                    screenGame.displaySelections();
+                }
+            });
+             */
+
 
             tile.field.setArrivalCallback(new Delegate() {
                 @Override

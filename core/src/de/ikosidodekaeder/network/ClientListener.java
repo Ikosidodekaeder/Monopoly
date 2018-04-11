@@ -2,6 +2,7 @@ package de.ikosidodekaeder.network;
 
 import java.util.Hashtable;
 
+import de.ikosidodekaeder.monopoly.Monopoly;
 import de.ikosidodekaeder.network.HexaServer;
 import de.ikosidodekaeder.network.PacketListener;
 import de.ikosidodekaeder.network.Packets.PacketJoin;
@@ -29,8 +30,10 @@ public class ClientListener extends PacketListener {
                 @Override
                 public void invoke(Object... args) throws Exception {
                     PacketKeepAlive packet = (PacketKeepAlive) args[0];
-                    server.send(new PacketKeepAlive(packet.getSessionID()));
-                    System.out.println("KEEPALIVE");
+                    if (!server.isHost()) {
+                        server.send(new PacketKeepAlive(packet.getSessionID()));
+                        System.out.println("KEEPALIVE");
+                    }
                 }
             });
 
@@ -53,7 +56,7 @@ public class ClientListener extends PacketListener {
                     System.out.println(HexaServer.senderId.toString() + " ////// " + packet.getHostId().toString());
                     if (packet.getHostId().equals(HexaServer.senderId)) {
                         System.out.println("==== YOU HAVE JOINED THE GAME!! (Username: " + packet.getUsername() + ")");
-                        //ScreenManager.getInstance().setCurrentScreen(ScreenType.LOBBY);
+                        Monopoly.instance.setScreen(Monopoly.instance.screenLobby);
                     } else {
                         System.out.println(packet.getUsername() + " has joined the game");
                         //GameManager.instance.messageUtil.add(packet.getUsername() + " has joined the room!");
@@ -78,10 +81,9 @@ public class ClientListener extends PacketListener {
                     if (packetLeave.getLeaverUuid().equals(HexaServer.senderId)) {
                         ConsoleColours.Print(ConsoleColours.BLACK_BOLD+ConsoleColours.YELLOW_BACKGROUND,"##### YOU - " + message + HexaServer.WhatAmI(server));
                         server.disconnect();
-                        //ScreenManager.getInstance().setCurrentScreen(ScreenType.MAIN_MENU);
+                        Monopoly.instance.setScreen(Monopoly.instance.screenMenu);
                     } else {
                         ConsoleColours.Print(ConsoleColours.BLACK_BOLD+ConsoleColours.YELLOW_BACKGROUND,"##### SOMEONE ELSE - " + message + HexaServer.WhatAmI(server));
-                       // GameManager.instance.messageUtil.add(message);
 
                     }
 
@@ -131,6 +133,7 @@ public class ClientListener extends PacketListener {
                         System.out.println(e);
 
 
+                    Monopoly.instance.screenJoin.updateServerList(packetServerList.entries);
                     /*if (ScreenManager.getInstance().getCurrentScreen().getScreenType() == ScreenType.JOIN) {
                         final ScreenJoin screenJoin = (ScreenJoin) ScreenManager.getInstance().getCurrentScreen();
 

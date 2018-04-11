@@ -12,6 +12,7 @@ import java.util.List;
 
 import de.ikosidodekaeder.logic.FieldTypes.Street;
 import de.ikosidodekaeder.logic.interfaces.Field;
+import de.ikosidodekaeder.monopoly.graphics.ClickEvent;
 import de.ikosidodekaeder.monopoly.graphics.elements.ElementContainer;
 import de.ikosidodekaeder.monopoly.graphics.elements.UILabel;
 import de.ikosidodekaeder.monopoly.graphics.elements.UiElement;
@@ -26,7 +27,8 @@ public class RenderTile extends ElementContainer {
     public Field field;
     private int fieldType;
 
-    private List<UiImage> buildings = new ArrayList<>();
+    public  UiImage         uiImage;
+    private List<UiImage>   buildings = new ArrayList<>();
 
     public RenderTile(float x, float y, float width, float height, String path, Color color, String name, int fieldType) {
         super(x, y, width, height);
@@ -41,7 +43,7 @@ public class RenderTile extends ElementContainer {
         setWidth(image.getWidth());
         setHeight(image.getHeight());
 
-        UiImage uiImage = new UiImage(x, y, image);
+        uiImage = new UiImage(x, y, image);
         children.add(uiImage);
 
         if (name != null) {
@@ -142,5 +144,9 @@ public class RenderTile extends ElementContainer {
         }
 
         return true;
+    }
+
+    public void addClickEvent(ClickEvent clickEvent) {
+        uiImage.addClickEvent(clickEvent);
     }
 }

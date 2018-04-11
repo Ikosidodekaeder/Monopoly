@@ -40,5 +40,13 @@ public class PacketServerList extends Packet {
             this.host = host;
             this.room = room;
         }
+
+        @Override
+        public String toString() {
+            return "Entry{" +
+                    "host=" + host +
+                    ", room='" + room + '\'' +
+                    '}';
+        }
     }
 }

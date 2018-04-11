@@ -4,27 +4,31 @@ import com.badlogic.gdx.Game;
 
 import java.io.IOException;
 
-import de.ikosidodekaeder.logic.Board;
 import de.ikosidodekaeder.monopoly.graphics.util.FontManager;
 import de.ikosidodekaeder.monopoly.graphics.util.MenuUtil;
+import de.ikosidodekaeder.monopoly.screens.MonopolyScreen;
 import de.ikosidodekaeder.monopoly.screens.ScreenGame;
 import de.ikosidodekaeder.monopoly.screens.ScreenHost;
 import de.ikosidodekaeder.monopoly.screens.ScreenJoin;
+import de.ikosidodekaeder.monopoly.screens.ScreenLoading;
+import de.ikosidodekaeder.monopoly.screens.ScreenLobby;
 import de.ikosidodekaeder.monopoly.screens.ScreenMenu;
 import de.ikosidodekaeder.network.HexaServer;
 import de.ikosidodekaeder.network.Packets.PacketJoin;
 import de.ikosidodekaeder.network.Packets.PacketRegister;
-import de.ikosidodekaeder.network.Packets.PacketServerList;
 
 public class Monopoly extends Game {
 
     public static Monopoly instance;
-    HexaServer Server;
+    public HexaServer server;
 
-	public ScreenGame screenGame;
-    public ScreenMenu screenMenu;
-    public ScreenHost screenHost;
-    public ScreenJoin screenJoin;
+	public ScreenGame  screenGame;
+    public ScreenMenu  screenMenu;
+    public ScreenHost  screenHost;
+    public ScreenJoin  screenJoin;
+    public ScreenLobby screenLobby;
+
+    public ScreenLoading    screenLoading;
 
     public Monopoly() {
         instance = this;
@@ -36,52 +40,35 @@ public class Monopoly extends Game {
         FontManager.init();
         new MenuUtil();
 
-        screenMenu = new ScreenMenu();
-        screenHost = new ScreenHost(screenMenu);
-        screenJoin = new ScreenJoin(screenMenu);
+        screenLoading = new ScreenLoading();
+        screenLoading.create();
 
-        screenGame = new ScreenGame();
+        screenMenu  = new ScreenMenu();
+        screenHost  = new ScreenHost(screenMenu);
+        screenJoin  = new ScreenJoin(screenMenu);
+        screenLobby = new ScreenLobby(screenMenu);
+        screenGame  = new ScreenGame();
+
+        screenLoading.updateCallback = new ScreenLoading.Callback() {
+            private int i = 0;
+            private MonopolyScreen[] toLoad = new MonopolyScreen[]{screenMenu, screenHost, screenJoin, screenLobby, screenGame};
+            @Override
+            public void update() {
+                toLoad[i].create();
+                i++;
+                if (i >= toLoad.length) {
+                    setScreen(screenMenu);
+                }
+            }
+        };
 
 
-        screenMenu.create();
-        screenHost.create();
-        screenJoin.create();
-
-        screenGame.create();
-
-
-        this.setScreen(screenMenu);
-
-        Server = new HexaServer(
-                "svdragster.dtdns.net",
-                25565,
-                true
-        );
-
-        try {
-            Server.connect(10_000);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Server.broadcastKeepAlive();
-        Server.send(new PacketRegister("Room 1",false));
-        Server.send(new PacketJoin("Test",HexaServer.senderId,"1"));
-
+        this.setScreen(screenLoading);
 
 	}
 
-	int sdfsdf = 0;
-
 	@Override
 	public void render() {
-        //Because i can
-        //Server.broadcastKeepAlive();
-        sdfsdf++;
-        if (sdfsdf >= 20) {
-            //Server.send(new PacketServerList(HexaServer.senderId));
-            sdfsdf = 0;
-        }
 		super.render();
 	}
 	
@@ -89,4 +76,23 @@ public class Monopoly extends Game {
 	public void dispose() {
 
 	}
+
+	public void connect(boolean isHost) {
+        server = new HexaServer(
+                "svdragster.dtdns.net",
+                //"localhost",
+                25565,
+                isHost
+        );
+
+        try {
+            server.connect(10_000);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (isHost) {
+            server.send(new PacketRegister("Room 1", false));
+        }
+    }
 }

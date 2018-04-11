@@ -4,8 +4,14 @@ package de.ikosidodekaeder.network;
  * Created by z003pksw on 09.04.2018.
  */
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+
 import java.util.Hashtable;
 
+import de.ikosidodekaeder.monopoly.Monopoly;
+import de.ikosidodekaeder.monopoly.graphics.elements.UiButton;
+import de.ikosidodekaeder.monopoly.graphics.util.MenuUtil;
+import de.ikosidodekaeder.monopoly.screens.ScreenJoin;
 import de.ikosidodekaeder.network.Packets.Packet;
 import de.ikosidodekaeder.network.Packets.PacketJoin;
 import de.ikosidodekaeder.network.Packets.PacketKeepAlive;
@@ -40,7 +46,7 @@ public class ServerListener extends PacketListener {
                     ConsoleColours.Print(ConsoleColours.WHITE_BOLD + ConsoleColours.PURPLE_BACKGROUND,"Received Keep Alive (" + diff + " ms)");
 
                     PacketKeepAlive packet = (PacketKeepAlive) args[0];
-                    server.send(new PacketKeepAlive(1));
+                    //server.send(new PacketKeepAlive(1));
                     System.out.println("KEEPALIVE");
                 }
             });
@@ -51,15 +57,9 @@ public class ServerListener extends PacketListener {
                     PacketRegister packet = (PacketRegister) args[0];
                     ConsoleColours.Print(ConsoleColours.WHITE_BOLD + ConsoleColours.PURPLE_BACKGROUND,"==== RECEIVED REGISTER ====");
                     System.out.println(ConsoleColours.BLACK_BOLD + "==== RECEIVED REGISTER ==== " + packet.isCancelled() + ConsoleColours.RESET);
-                    /*if (ScreenManager.getInstance().getCurrentScreen().getScreenType() == ScreenType.MAIN_MENU) {
-                        ScreenMainMenu mainMenu = (ScreenMainMenu) ScreenManager.getInstance().getCurrentScreen();
-                        mainMenu.getWindowManager().removeNotifications(mainMenu.getStage());
-                        if (packet.isCancelled()) {
-                            new WindowNotification("You are already registered.\n(Please wait a few seconds)", mainMenu.getStage(), mainMenu.getWindowManager());
-                        } else {
-                            ScreenManager.getInstance().setCurrentScreen(ScreenType.HOST);
-                        }
-                    }*/
+                    if (Monopoly.instance.getScreen().equals(Monopoly.instance.screenMenu)) {
+                        Monopoly.instance.setScreen(Monopoly.instance.screenHost);
+                    }
                 }
             });
 
@@ -72,10 +72,10 @@ public class ServerListener extends PacketListener {
                     /*server.getSessionData().addNewPlayer(packet.getSenderId(), packet.getUsername(),
                             GameManager.instance.colorUtil.getNext());
                     System.out.println(packet.getUsername() + " has joined the game (I AM THE SERVER)");
+                    */
 
                     // I'm the host, so I have to broadcast to my players that a new player has joined the game
                     server.send(new PacketJoin(packet.getUsername(), packet.getSenderId(), packet.getVersion()));
-                    */
                 }
             });
 
@@ -87,10 +87,9 @@ public class ServerListener extends PacketListener {
 
                     // Confirm the Leave Packet by sending it to the router
                     // (The router sends it to all clients)
-                    /*server.send(new PacketLeave(leave.getLeaverUuid(), leave.isKick()));
+                    server.send(new PacketLeave(leave.getLeaverUuid(), leave.isKick()));
 
-                    server.getSessionData().removePlayer(leave.getSenderId());
-                    */
+                    //server.getSessionData().removePlayer(leave.getSenderId());
                 }
             });
 

@@ -16,7 +16,7 @@ public class PacketJoin extends Packet {
     private String Username;
 
     /**
-     * Issued by the Client-Server itself
+     * Issued by the Client-server itself
      */
     private UUID hostId;
     private String Version;

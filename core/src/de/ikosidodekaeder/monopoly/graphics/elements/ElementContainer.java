@@ -20,6 +20,7 @@ public class ElementContainer extends UiElement {
     @Override
     public void addToStage(Stage stage) {
         for (UiElement child : children) {
+            System.out.println("Added " + child.x + ", " + child.y + " " + child.getClass().getName() + "(Parent: " + this.getClass().getName() + ")");
             child.addToStage(stage);
         }
     }

@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import de.ikosidodekaeder.monopoly.graphics.ClickEvent;
+
 /**
  * Created by Sven on 20.12.2017.
  */
@@ -77,7 +79,14 @@ public class UiImage extends UiElement {
         image.setY(y);
     }
 
-    public void addClickListener(ClickListener listener) {
-        image.addListener(listener);
+    public void addClickEvent(final ClickEvent e) {
+        image.addListener(new ClickListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("click image");
+                e.click();
+                return true;
+            }
+        });
     }
 }
