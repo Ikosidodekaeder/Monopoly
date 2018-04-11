@@ -63,8 +63,12 @@ public class HumanPlayer implements Player {
         this.Money = Integer.parseInt(input[2]);
         this.turnFinished = Boolean.parseBoolean(input[3]);
 
-        for (int i = 4; i < input.length; i++)
-            this.propeties.get(i).UpdateAttributes(input[i]);
+        String[] fields = input[4].split(",");
+
+        for (int i = 0; i < fields.length; i++){
+            this.propeties.get(i).UpdateAttributes(fields[i]);
+        }
+
 
 
         return this;

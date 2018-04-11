@@ -2,7 +2,6 @@ package de.ikosidodekaeder.logic.interfaces;
 
 
 import de.ikosidodekaeder.logic.PlayerFigure;
-import jdk.internal.util.xml.impl.Input;
 
 import java.util.ArrayList;
 import java.util.List;
