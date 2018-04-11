@@ -1,6 +1,7 @@
 package de.ikosidodekaeder.monopoly.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
@@ -13,10 +14,13 @@ import de.ikosidodekaeder.monopoly.graphics.elements.UiElement;
 
 public abstract class MonopolyScreen implements Screen {
 
+
     ElementContainer elements = new ElementContainer(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     ElementContainer uiElements = new ElementContainer(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     Stage stage = new Stage();
     Stage uiStage = new Stage();
+
+    InputMultiplexer multiplexer = new InputMultiplexer(stage, uiStage);
 
     public void addElement(UiElement element) {
         element.addToStage(stage);
@@ -34,6 +38,7 @@ public abstract class MonopolyScreen implements Screen {
     public void show() {
         elements.show(stage);
         uiElements.show(uiStage);
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override

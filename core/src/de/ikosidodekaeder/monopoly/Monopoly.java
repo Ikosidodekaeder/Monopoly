@@ -8,6 +8,8 @@ import de.ikosidodekaeder.logic.Board;
 import de.ikosidodekaeder.monopoly.graphics.util.FontManager;
 import de.ikosidodekaeder.monopoly.graphics.util.MenuUtil;
 import de.ikosidodekaeder.monopoly.screens.ScreenGame;
+import de.ikosidodekaeder.monopoly.screens.ScreenHost;
+import de.ikosidodekaeder.monopoly.screens.ScreenJoin;
 import de.ikosidodekaeder.monopoly.screens.ScreenMenu;
 import de.ikosidodekaeder.network.HexaServer;
 import de.ikosidodekaeder.network.Packets.PacketJoin;
@@ -21,6 +23,8 @@ public class Monopoly extends Game {
 
 	public ScreenGame screenGame;
     public ScreenMenu screenMenu;
+    public ScreenHost screenHost;
+    public ScreenJoin screenJoin;
 
     public Monopoly() {
         instance = this;
@@ -33,12 +37,20 @@ public class Monopoly extends Game {
         new MenuUtil();
 
         screenMenu = new ScreenMenu();
+        screenHost = new ScreenHost(screenMenu);
+        screenJoin = new ScreenJoin(screenMenu);
+
         screenGame = new ScreenGame();
 
+
         screenMenu.create();
+        screenHost.create();
+        screenJoin.create();
+
         screenGame.create();
 
-        this.setScreen(screenGame);
+
+        this.setScreen(screenMenu);
 
         Server = new HexaServer(
                 "svdragster.dtdns.net",
