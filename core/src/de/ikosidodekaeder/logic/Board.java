@@ -15,6 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Johannes Lüke on 08.04.2018.
@@ -98,21 +99,14 @@ public class Board {
     }
 
     public Pair<Integer,Integer> ThrowDices(){
+        Random rand = new Random();
+
         return new Pair<>(
-                (((byte)(Math.random()*10))%6),
-                ((byte)(Math.random()*10))%6
+                (((byte)rand.nextInt((6 - 1) + 1) + 1)) ,
+                (((byte)rand.nextInt((6 - 1) + 1) + 1))
         );
     }
 
-    @Override
-    public String toString(){
-       StringBuilder builder = new StringBuilder();
-
-       for(int i = 0; i < actualBoard.size(); i++){
-           builder.append(actualBoard.get(i)).append("\n");
-       }
-       return builder.toString();
-    }
 
     public int wrapPos(int Pos){
         if(Pos < actualBoard.size())
@@ -174,5 +168,21 @@ public class Board {
 
 
 
+    @Override
+    public String toString(){
+        StringBuilder builder = new StringBuilder();
+
+        for(Field f : actualBoard)
+            builder
+                    .append(f.toString())
+                    .append(";");
+
+        for (Player player : Players){
+            builder.append(player.toString())
+                    .append(";");
+        }
+
+        return builder.toString();
+    }
 
 }

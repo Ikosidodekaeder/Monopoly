@@ -24,6 +24,7 @@ public abstract class MonopolyScreen implements Screen {
     }
 
     public void addGuiElement(UiElement element) {
+
         element.addToStage(uiStage);
         uiElements.children.add(element);
     }

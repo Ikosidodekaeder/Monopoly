@@ -3,10 +3,12 @@ package de.ikosidodekaeder.logic;
 import de.ikosidodekaeder.logic.FieldTypes.Street;
 import de.ikosidodekaeder.logic.interfaces.Field;
 import de.ikosidodekaeder.logic.interfaces.Player;
+import de.ikosidodekaeder.logic.interfaces.UpdateData;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -21,6 +23,53 @@ public class HumanPlayer implements Player {
     int             Money;
     boolean         turnFinished = true;
     int             position = -1;
+
+
+    @Override
+    public String toString(){
+
+        StringBuilder builder = new StringBuilder();
+
+        builder
+                .append(figure)
+                .append(";")
+                .append(name)
+                .append(";")
+                .append(position)
+                .append(";")
+                .append(Money)
+                .append(";")
+                .append(turnFinished)
+                .append(";");
+
+        for(Field f : propeties){
+            builder.append(f.toString())
+                    .append(",");
+        }
+
+        return builder.toString();
+    }
+
+
+    @Override
+    public UpdateData UpdateAttributes(String data){
+        String[] input = data.split(";");
+        if(input.length < 4)
+            throw new IllegalArgumentException("Data Argument has not enough data inside. (needs at least 4 different items)");
+
+        this.figure = PlayerFigure.valueOf(input[0]);
+        this.name = input[1];
+        this.position = Integer.parseInt(input[1]);
+        this.Money = Integer.parseInt(input[2]);
+        this.turnFinished = Boolean.parseBoolean(input[3]);
+
+        for (int i = 4; i < input.length; i++)
+            this.propeties.get(i).UpdateAttributes(input[i]);
+
+
+        return this;
+
+    }
 
     public HumanPlayer(PlayerFigure ID, String name){
 

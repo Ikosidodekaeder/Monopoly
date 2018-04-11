@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import de.ikosidodekaeder.monopoly.graphics.util.FontManager;
 
@@ -26,7 +27,7 @@ public class UiButton extends UiElement {
 
     private EnterEvent      enterEvent;
     private ExitEvent       exitEvent;
-    private ChangeListener clickEvent;
+    private ChangeListener  clickEvent;
 
     public UiButton(final String text, float x, float y, float width, float height, int fontSize) {
         super(x, y, width, height);
@@ -59,6 +60,7 @@ public class UiButton extends UiElement {
         textButton.addListener(new InputListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                System.out.println("Enter Button");
                 if (enterEvent != null) {
                     enterEvent.enter(UiButton.this);
                 }
@@ -66,6 +68,7 @@ public class UiButton extends UiElement {
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                System.out.println("Exit Button");
                 if (exitEvent != null) {
                     exitEvent.exit(UiButton.this);
                 }
@@ -73,6 +76,7 @@ public class UiButton extends UiElement {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("TouchDown Button");
                 if (clickEvent != null) {
                     clickEvent.changed(null, event.getTarget());
                     return true;
@@ -119,8 +123,8 @@ public class UiButton extends UiElement {
     }
 
     public void addListener(ChangeListener listener) {
-        //this.textButton.addListener(listener);
-        this.clickEvent = listener;
+        this.textButton.addListener(listener);
+        //this.clickEvent = listener;
     }
 
     public void setDisplayX(float x) {

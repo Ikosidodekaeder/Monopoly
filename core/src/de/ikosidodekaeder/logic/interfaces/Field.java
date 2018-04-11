@@ -2,11 +2,12 @@ package de.ikosidodekaeder.logic.interfaces;
 
 
 import de.ikosidodekaeder.logic.PlayerFigure;
+import jdk.internal.util.xml.impl.Input;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Field implements OnArrival {
+public abstract class Field implements OnArrival, UpdateData {
 
     protected String        Name     = "Nirvana";
     protected PlayerFigure  Owner    = null;
@@ -66,5 +67,27 @@ public abstract class Field implements OnArrival {
     }
 
     public abstract void onArrival(Player player);
+
+    @Override
+    public UpdateData UpdateAttributes(String data){
+
+        String[] input = data.split(";");
+        if(input.length < 5)
+            throw new IllegalArgumentException("Data Argument has not enough data inside");
+
+        this.Name = input[0];
+        this.Owner = PlayerFigure.valueOf(input[1]);
+        this.Value = Integer.parseInt(input[2]);
+        this.Position =  Integer.parseInt(input[3]);
+        this.group =  Integer.parseInt(input[4]);
+
+        return this;
+
+    }
+
+    @Override
+    public String toString(){
+        return Name+ ";" + Owner.name() + ";" + Value + ";"+Position+";"+group;
+    }
 
 }

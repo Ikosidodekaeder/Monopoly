@@ -5,7 +5,7 @@ import de.ikosidodekaeder.logic.PlayerFigure;
 
 import java.util.List;
 
-public interface Player{
+public interface Player extends UpdateData {
 
     String NameOfPlayer();
     PlayerFigure PlayerID();
