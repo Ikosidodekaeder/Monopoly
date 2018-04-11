@@ -32,6 +32,7 @@ public class Board {
 
     public List<Field>     actualBoard = new ArrayList<Field>();
     public List<Player>    Players = new ArrayList<Player>();
+    Random rand = new Random();
 
     PlayerFigure           ClientFigure = PlayerFigure.CAR;
 
@@ -109,7 +110,7 @@ public class Board {
     }
 
     public Pair<Integer,Integer> ThrowDices(){
-        Random rand = new Random();
+
 
         return new Pair<>(
                 (((byte)rand.nextInt((6 - 1) + 1) + 1)) ,
