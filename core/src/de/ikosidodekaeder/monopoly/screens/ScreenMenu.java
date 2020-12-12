@@ -30,7 +30,7 @@ public class ScreenMenu extends MonopolyScreen {
         background.setDisplayY(Gdx.graphics.getHeight()/2 - background.getHeight()/2);
 
         background.addToStage(stage);
-
+        
         UILabel title = new UILabel(MenuUtil.getInstance().getX(), MenuUtil.getInstance().getY() + 600, 0, 0, 42, "Monopoly");
         addElement(title);
 

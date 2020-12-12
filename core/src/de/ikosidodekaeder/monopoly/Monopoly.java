@@ -1,10 +1,6 @@
 package de.ikosidodekaeder.monopoly;
 
 import com.badlogic.gdx.Game;
-
-import java.io.IOException;
-
-import de.ikosidodekaeder.logic.Board;
 import de.ikosidodekaeder.monopoly.graphics.util.FontManager;
 import de.ikosidodekaeder.monopoly.graphics.util.MenuUtil;
 import de.ikosidodekaeder.monopoly.screens.ScreenGame;
@@ -15,6 +11,8 @@ import de.ikosidodekaeder.network.HexaServer;
 import de.ikosidodekaeder.network.Packets.PacketJoin;
 import de.ikosidodekaeder.network.Packets.PacketRegister;
 import de.ikosidodekaeder.network.Packets.PacketServerList;
+
+import java.io.IOException;
 
 public class Monopoly extends Game {
 
